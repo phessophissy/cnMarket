@@ -56,3 +56,4 @@ export { MintRaritySelector } from "./MintRaritySelector";
 export { MintStats } from "./MintStats";
 export { MintHistory } from "./MintHistory";
 export { GasEstimate } from "./GasEstimate";
+export { MintPriceCard } from "./MintPriceCard";

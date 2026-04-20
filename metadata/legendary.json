@@ -1,0 +1,9 @@
+{
+  "name": "Celo NFT - Legendary",
+  "description": "A Legendary rarity NFT from cnMarket. Extremely rare and valuable.",
+  "image": "ipfs://YOUR_LEGENDARY_IMAGE_CID",
+  "attributes": [
+    { "trait_type": "Rarity", "value": "Legendary" },
+    { "trait_type": "Tier", "value": 3 }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Celo NFT - Rare",
+  "description": "A Rare rarity NFT from cnMarket. Limited and sought after.",
+  "image": "ipfs://YOUR_RARE_IMAGE_CID",
+  "attributes": [
+    { "trait_type": "Rarity", "value": "Rare" },
+    { "trait_type": "Tier", "value": 2 }
+  ]
+}

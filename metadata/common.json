@@ -1,0 +1,9 @@
+{
+  "name": "Celo NFT - Common",
+  "description": "A Common rarity NFT from cnMarket. Affordable and accessible.",
+  "image": "ipfs://YOUR_COMMON_IMAGE_CID",
+  "attributes": [
+    { "trait_type": "Rarity", "value": "Common" },
+    { "trait_type": "Tier", "value": 1 }
+  ]
+}

@@ -3,10 +3,24 @@ node_modules/
 cache/
 artifacts/
 typechain-types/
+
+# Environment & secrets
 .env
-.env.local
-frontend/.env.local
+.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Wallet & key files
 wallets.json
+wallets-*.json
+*.key
+*.pem
+*.secret
+*private*key*
+
+# Coverage
 coverage/
 coverage.json
 
@@ -26,8 +40,13 @@ npm-debug.log*
 frontend/out/
 dist/
 
-# Misc
-*.swp
-*.swo
+# Sensitive scripts (wallet generation, funding, PR automation)
+scripts/generate-wallets.js
+scripts/fund-wallets.js
+scripts/generate-prs.sh
+scripts/generate-prs-cont.sh
 generate-commits.sh
 generate-commits-2.sh
+/tmp/fix-prs.sh
+pr-gen.log
+pr-gen-cont.log

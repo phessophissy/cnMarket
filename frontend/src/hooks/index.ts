@@ -10,3 +10,4 @@ export { useClipboard } from "./useClipboard";
 export { useMiniPay } from "./useMiniPay";
 export { useMiniPayTransaction } from "./useMiniPayTransaction";
 export { useMiniPayStatus } from "./useMiniPayStatus";
+export { useErrorHandler } from "./useErrorHandler";

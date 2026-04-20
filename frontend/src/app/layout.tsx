@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "cnMarket",
@@ -18,8 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans">
-        <Providers>{children}</Providers>
+      <body className="font-sans min-h-screen flex flex-col">
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

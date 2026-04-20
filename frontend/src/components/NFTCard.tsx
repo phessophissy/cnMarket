@@ -24,7 +24,7 @@ export function NFTCard({
 
   return (
     <Link href={`/nft/${tokenId.toString()}`}>
-      <div className="bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-green-500 transition-all cursor-pointer group">
+      <div className="bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-green-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-500/10 cursor-pointer group">
         <div
           className={`h-48 bg-gradient-to-br ${colors.gradient} flex items-center justify-center relative`}
         >

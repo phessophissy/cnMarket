@@ -6,3 +6,7 @@ export { isValidAddress, isValidPrice, isValidTokenId } from "./validation";
 export { formatCeloPrice, formatNumber, timeAgo } from "./format";
 export type { Rarity, NFTItem, Listing, MintEvent, TransactionStatus } from "./types";
 export { isMiniPayBrowser, supportsFeeCurrency, getMiniPayConnectorId } from "./minipay";
+export { supportedChains, defaultChain, chainConfig } from "./chains";
+export { getConnectors, getMiniPayConnector } from "./connectors";
+export { RPC_URLS, getCeloRpcUrl } from "./rpc";
+export { detectWallet, getWalletDisplayName } from "./wallet";

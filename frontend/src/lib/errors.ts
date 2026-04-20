@@ -1,16 +1,21 @@
-/**
- * Extract user-friendly error message from contract errors
- */
-export function parseContractError(error: unknown): string {
-  const msg = error instanceof Error ? error.message : String(error);
+export class AppError extends Error {
+  constructor(message: string, public code: string, public recoverable = true) {
+    super(message); this.name = "AppError";
+  }
+}
+export class WalletError extends AppError { constructor(m: string) { super(m, "WALLET_ERROR"); this.name = "WalletError"; } }
+export class TransactionError extends AppError { constructor(m: string, public txHash?: string) { super(m, "TX_ERROR", false); this.name = "TransactionError"; } }
+export class NetworkError extends AppError { constructor(m = "Network error") { super(m, "NETWORK_ERROR"); this.name = "NetworkError"; } }
 
-  if (msg.includes("Incorrect CELO amount")) return "Incorrect CELO amount sent.";
-  if (msg.includes("user rejected")) return "Transaction rejected by user.";
-  if (msg.includes("insufficient funds")) return "Insufficient CELO balance.";
-  if (msg.includes("NFT not listed")) return "This NFT is not listed for sale.";
-  if (msg.includes("Cannot buy your own")) return "You cannot buy your own NFT.";
-  if (msg.includes("Not the owner")) return "You don't own this NFT.";
-  if (msg.includes("Not approved")) return "NFT not approved for marketplace.";
-
-  return msg.length > 100 ? msg.slice(0, 100) + "..." : msg;
+export function getErrorMessage(error: unknown): string {
+  if (error instanceof AppError) return error.message;
+  if (error instanceof Error) {
+    if (error.message.includes("user rejected")) return "Transaction cancelled by user";
+    if (error.message.includes("insufficient funds")) return "Insufficient CELO balance";
+    return error.message;
+  }
+  return "An unexpected error occurred";
+}
+export function isUserRejection(error: unknown): boolean {
+  return error instanceof Error && (error.message.toLowerCase().includes("user rejected") || error.message.toLowerCase().includes("user denied"));
 }

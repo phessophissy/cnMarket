@@ -57,3 +57,28 @@ cd frontend && npm run dev
 ## 📄 License
 
 [MIT](LICENSE)
+
+## 📁 Project Structure
+
+```
+cnMarket/
+├── contracts/           # Solidity smart contracts
+│   ├── CeloNFT.sol     # ERC-721 NFT with rarity levels
+│   └── NFTMarketplace.sol # Marketplace with listings
+├── frontend/            # Next.js 14 frontend
+│   ├── src/app/         # App router pages
+│   ├── src/components/  # Reusable UI components (30+)
+│   ├── src/hooks/       # Custom React hooks (9)
+│   └── src/lib/         # Utilities, config, and types
+├── scripts/             # Deployment & verification scripts
+├── test/                # Smart contract unit tests
+└── .github/             # CI/CD workflows and templates
+```
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
+
+## 🔒 Security
+
+See [SECURITY.md](SECURITY.md) for our security policy.

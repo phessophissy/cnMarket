@@ -6,6 +6,7 @@ typechain-types/
 .env
 .env.local
 frontend/.env.local
+wallets.json
 coverage/
 coverage.json
 

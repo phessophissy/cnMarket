@@ -19,4 +19,4 @@ export * from './useNft_ownership_verify';
 export * from './useCelo_chain_config';
 export * from './useLoading_skeleton_ui';
 export * from './useNft_price_display';
-export * from './useContract_event_listener';
+export * from './useMinipay_send_tx';

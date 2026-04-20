@@ -1,0 +1,6 @@
+import React from 'react';
+// feat: add NFT metadata async loader Panel
+export const Nft_metadata_loaderPanel = () => (
+  <div className="minipay-panel">feat: add NFT metadata async loader</div>
+);
+export default Nft_metadata_loaderPanel;

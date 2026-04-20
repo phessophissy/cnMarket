@@ -7,3 +7,4 @@ export { useMediaQuery, useIsMobile } from "./useMediaQuery";
 export { useLocalStorage } from "./useLocalStorage";
 export { useDebounce } from "./useDebounce";
 export { useClipboard } from "./useClipboard";
+export * from './useContract_event_listener';

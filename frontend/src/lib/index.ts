@@ -13,3 +13,4 @@ export { detectWallet, getWalletDisplayName } from "./wallet";
 export * from './_wallet_address_truncate_add_configuration';
 export * from './_dark_mode_support_add_configuration';
 export * from './_nft_ownership_verify_add_configuration';
+export * from './_celo_chain_config_add_configuration';

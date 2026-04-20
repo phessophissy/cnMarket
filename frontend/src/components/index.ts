@@ -50,3 +50,8 @@ export { Tabs } from "./Tabs";
 export { Countdown } from "./Countdown";
 export { SkipToContent } from "./SkipToContent";
 export { VisuallyHidden } from "./VisuallyHidden";
+export { MiniPayMintButton } from "./MiniPayMintButton";
+export { MintConfirmation } from "./MintConfirmation";
+export { MintRaritySelector } from "./MintRaritySelector";
+export { MintStats } from "./MintStats";
+export { MintHistory } from "./MintHistory";

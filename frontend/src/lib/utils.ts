@@ -24,3 +24,17 @@ export function formatCelo(wei: bigint): string {
   const ether = Number(wei) / 1e18;
   return ether.toFixed(ether < 0.01 ? 4 : 2);
 }
+
+/**
+ * Get block explorer URL for a transaction hash
+ */
+export function getExplorerTxUrl(hash: string): string {
+  return `https://celoscan.io/tx/${hash}`;
+}
+
+/**
+ * Get block explorer URL for an address
+ */
+export function getExplorerAddressUrl(address: string): string {
+  return `https://celoscan.io/address/${address}`;
+}

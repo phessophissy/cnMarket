@@ -15,3 +15,4 @@ export * from './_dark_mode_support_add_configuration';
 export * from './_nft_ownership_verify_add_configuration';
 export * from './_celo_chain_config_add_configuration';
 export * from './_loading_skeleton_ui_add_configuration';
+export * from './_nft_price_display_add_configuration';

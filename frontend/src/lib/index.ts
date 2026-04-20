@@ -11,3 +11,4 @@ export { getConnectors, getMiniPayConnector } from "./connectors";
 export { RPC_URLS, getCeloRpcUrl } from "./rpc";
 export { detectWallet, getWalletDisplayName } from "./wallet";
 export * from './_wallet_address_truncate_add_configuration';
+export * from './_dark_mode_support_add_configuration';

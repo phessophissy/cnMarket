@@ -1,3 +1,4 @@
+import { ZERO_ADDRESS } from "./constants";
 export const NFT_ADDRESS = (process.env.NEXT_PUBLIC_NFT_ADDRESS ||
   "0x0000000000000000000000000000000000000000") as `0x${string}`;
 

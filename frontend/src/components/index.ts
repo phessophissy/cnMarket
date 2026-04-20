@@ -9,6 +9,7 @@ export { Divider } from "./Divider";
 export { Navbar } from "./Navbar";
 export { MiniPayBadge } from "./MiniPayBadge";
 export { MiniPayBanner } from "./MiniPayBanner";
+export { MiniPayInstall } from "./MiniPayInstall";
 export { Footer } from "./Footer";
 export { Breadcrumb } from "./Breadcrumb";
 export { BackToTop } from "./BackToTop";

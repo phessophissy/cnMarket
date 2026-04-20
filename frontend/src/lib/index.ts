@@ -5,3 +5,4 @@ export { parseContractError } from "./errors";
 export { isValidAddress, isValidPrice, isValidTokenId } from "./validation";
 export { formatCeloPrice, formatNumber, timeAgo } from "./format";
 export type { Rarity, NFTItem, Listing, MintEvent, TransactionStatus } from "./types";
+export { isMiniPayBrowser, supportsFeeCurrency, getMiniPayConnectorId } from "./minipay";

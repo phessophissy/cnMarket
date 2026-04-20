@@ -26,4 +26,22 @@ module.exports = {
       chainId: 42220,
     },
   },
+  etherscan: {
+    apiKey: {
+      celo: process.env.CELOSCAN_API_KEY || "empty",
+    },
+    customChains: [
+      {
+        network: "celo",
+        chainId: 42220,
+        urls: {
+          apiURL: "https://api.celoscan.io/api",
+          browserURL: "https://celoscan.io",
+        },
+      },
+    ],
+  },
+  sourcify: {
+    enabled: true,
+  },
 };

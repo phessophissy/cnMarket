@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | cnMarket",
   },
   description: "Mint and trade NFTs with 3 rarity levels on Celo blockchain. Common, Rare, and Legendary NFTs available.",
-  keywords: ["NFT", "Celo", "marketplace", "mint", "blockchain", "ERC-721", "cnMarket"],
+  keywords: ["NFT", "Celo", "marketplace", "mint", "blockchain", "ERC-721", "cnMarket", "MiniPay"],
   authors: [{ name: "cnMarket" }],
   openGraph: {
     title: "cnMarket — NFT Marketplace on Celo",

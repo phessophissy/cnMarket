@@ -12,3 +12,4 @@ export { useMiniPayTransaction } from "./useMiniPayTransaction";
 export { useMiniPayStatus } from "./useMiniPayStatus";
 export { useErrorHandler } from "./useErrorHandler";
 export { useTransaction_toast } from "./useTransaction_toast";
+export * from './useWallet_address_truncate';

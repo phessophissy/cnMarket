@@ -22,6 +22,7 @@ export function Navbar() {
     { href: "/mint", label: "Mint" },
     { href: "/my-nfts", label: "My NFTs" },
     { href: "/about", label: "About" },
+    { href: "/faq", label: "FAQ" },
   ];
 
   return (

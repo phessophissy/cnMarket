@@ -22,7 +22,7 @@ export function AddressDisplay({
   className = "",
 }: AddressDisplayProps) {
   return (
-    <span className={`inline-flex items-center gap-2 font-mono text-sm ${className}`}>
+    <span className={`inline-flex items-center gap-2 font-mono text-sm text-emerald-100 ${className}`}>
       <span>{truncate ? truncateAddress(address) : address}</span>
       {copyable && <CopyButton text={address} label="📋" />}
     </span>

@@ -10,7 +10,7 @@ export function Avatar({ address, size = "md" }: AvatarProps) {
 
   return (
     <div
-      className={`${sizes[size]} rounded-full flex-shrink-0`}
+      className={`${sizes[size]} rounded-full flex-shrink-0 border border-white/15 shadow-sm`}
       style={{
         background: `linear-gradient(135deg, hsl(${hue}, 70%, 50%), hsl(${(hue + 60) % 360}, 70%, 40%))`,
       }}

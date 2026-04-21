@@ -38,16 +38,16 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-800">
+    <div className="border-b border-emerald-100/10">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left py-4 flex items-center justify-between hover:text-green-400 transition-colors"
+        className="w-full text-left py-4 flex items-center justify-between hover:text-emerald-100 transition-colors"
       >
         <span className="font-medium">{q}</span>
-        <span className="text-gray-400 text-xl">{open ? "−" : "+"}</span>
+        <span className="text-slate-300 text-xl">{open ? "−" : "+"}</span>
       </button>
       {open && (
-        <p className="text-gray-400 pb-4 animate-fade-in">{a}</p>
+        <p className="text-slate-300 pb-4 animate-fade-in leading-7">{a}</p>
       )}
     </div>
   );
@@ -59,12 +59,12 @@ export default function FAQPage() {
       <Navbar />
       <main className="max-w-3xl mx-auto px-4 py-12">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4">
+          <h1 className="text-4xl font-semibold mb-4" style={{ fontFamily: "var(--font-heading)" }}>
             Frequently Asked <span className="text-gradient">Questions</span>
           </h1>
-          <p className="text-gray-400">Everything you need to know about cnMarket</p>
+          <p className="text-slate-200/85">Everything you need to know about cnMarket</p>
         </div>
-        <div className="bg-gray-900 rounded-xl border border-gray-800 px-6">
+        <div className="glass-surface rounded-3xl border border-emerald-100/10 px-6">
           {faqs.map((faq) => (
             <FAQItem key={faq.q} {...faq} />
           ))}

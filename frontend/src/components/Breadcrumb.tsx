@@ -15,13 +15,13 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       <ol className="flex items-center space-x-2 text-sm">
         {items.map((item, i) => (
           <li key={item.label} className="flex items-center">
-            {i > 0 && <span className="text-gray-600 mx-2">/</span>}
+            {i > 0 && <span className="text-emerald-100/40 mx-2">/</span>}
             {item.href ? (
-              <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
+              <Link href={item.href} className="text-slate-300 hover:text-emerald-100 transition-colors">
                 {item.label}
               </Link>
             ) : (
-              <span className="text-white">{item.label}</span>
+              <span className="text-emerald-100">{item.label}</span>
             )}
           </li>
         ))}

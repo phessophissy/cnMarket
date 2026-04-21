@@ -9,14 +9,16 @@ export default function Error({
 }) {
   return (
     <main className="min-h-screen flex items-center justify-center px-4">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-red-500 mb-4">Something went wrong</h1>
-        <p className="text-gray-400 mb-8 max-w-md">
+      <div className="text-center glass-surface rounded-3xl p-8 md:p-10 border border-rose-200/15 max-w-lg w-full">
+        <h1 className="text-4xl font-semibold text-rose-200 mb-4" style={{ fontFamily: "var(--font-heading)" }}>
+          Something went wrong
+        </h1>
+        <p className="text-slate-300 mb-8 max-w-md mx-auto">
           {error.message || "An unexpected error occurred. Please try again."}
         </p>
         <button
           onClick={reset}
-          className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+          className="bg-gradient-to-r from-emerald-300 to-teal-300 hover:brightness-105 text-[#063b36] px-6 py-3 rounded-lg font-semibold transition"
         >
           Try Again
         </button>

@@ -37,10 +37,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col" style={{ fontFamily: "var(--font-body)" }}>
         <Providers>
-          {children}
-          <Footer />
+          <div className="app-shell">
+            {children}
+            <Footer />
+          </div>
           <BackToTop />
         </Providers>
       </body>

@@ -9,8 +9,8 @@ const textSizes = { sm: "text-lg", md: "text-xl", lg: "text-2xl" };
 /** Component update 40-3 */
 export function Logo({ size = "md" }: LogoProps) {
   return (
-    <Link href="/" className={`text-white font-bold ${textSizes[size]} flex items-center gap-2`}>
-      <span className="text-green-400">🎨</span>
+    <Link href="/" className={`text-white font-semibold ${textSizes[size]} flex items-center gap-2`} style={{ fontFamily: "var(--font-heading)" }}>
+      <span className="text-emerald-200">🎨</span>
       <span>cn<span className="text-gradient">Market</span></span>
     </Link>
   );

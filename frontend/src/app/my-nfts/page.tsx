@@ -43,7 +43,7 @@ function OwnedNFTCard({
   return (
     <div className="relative">
       {isListed && (
-        <div className="absolute top-2 right-2 z-10 bg-green-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+        <div className="absolute top-2 right-2 z-10 bg-emerald-300/90 text-[#083935] text-xs px-2 py-1 rounded-full font-semibold">
           Listed
         </div>
       )}
@@ -72,10 +72,12 @@ export default function MyNFTsPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">My NFTs</h1>
-          <p className="text-gray-400 mt-1">
+      <main className="max-w-7xl mx-auto px-4 py-10">
+        <div className="mb-8 glass-surface rounded-3xl p-6 md:p-8">
+          <h1 className="text-4xl font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
+            My Collection
+          </h1>
+          <p className="text-slate-200/85 mt-2">
             {isConnected && count > 0
               ? `You own ${count} NFT${count !== 1 ? "s" : ""}`
               : "View and manage your NFT collection"}
@@ -83,9 +85,9 @@ export default function MyNFTsPage() {
         </div>
 
         {!isConnected ? (
-          <div className="text-center py-20 bg-gray-900 rounded-xl border border-gray-800">
+          <div className="text-center py-20 glass-surface rounded-3xl border border-emerald-100/10">
             <p className="text-5xl mb-4">🔗</p>
-            <p className="text-gray-400">
+            <p className="text-slate-300">
               Connect your wallet to view your NFTs
             </p>
           </div>
@@ -96,14 +98,14 @@ export default function MyNFTsPage() {
             ))}
           </div>
         ) : count === 0 ? (
-          <div className="text-center py-20 bg-gray-900 rounded-xl border border-gray-800">
+          <div className="text-center py-20 glass-surface rounded-3xl border border-emerald-100/10">
             <p className="text-5xl mb-4">🖼️</p>
-            <p className="text-gray-400 text-lg">
+            <p className="text-slate-200 text-lg">
               You don&apos;t own any NFTs yet.
             </p>
             <a
               href="/mint"
-              className="text-green-400 hover:text-green-300 mt-2 inline-block font-medium"
+              className="text-emerald-200 hover:text-emerald-100 mt-2 inline-block font-medium"
             >
               Mint your first NFT →
             </a>

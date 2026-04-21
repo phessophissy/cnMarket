@@ -14,11 +14,11 @@ export function NetworkBadge() {
     <div
       className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium ${
         isCelo
-          ? "bg-green-500/10 text-green-400 border border-green-500/20"
-          : "bg-red-500/10 text-red-400 border border-red-500/20"
+          ? "bg-emerald-300/15 text-emerald-100 border border-emerald-100/25"
+          : "bg-rose-300/15 text-rose-100 border border-rose-100/25"
       }`}
     >
-      <span className={`w-2 h-2 rounded-full ${isCelo ? "bg-green-400" : "bg-red-400"} animate-pulse-dot`} />
+      <span className={`w-2 h-2 rounded-full ${isCelo ? "bg-emerald-300" : "bg-rose-300"} animate-pulse-dot`} />
       {isCelo ? "Celo" : `Wrong Network (${chain.name})`}
     </div>
   );

@@ -25,9 +25,9 @@ export function Notification({
   }, [type, onClose]);
 
   const styles = {
-    success: "bg-green-900/90 border-green-700 text-green-100",
-    error: "bg-red-900/90 border-red-700 text-red-100",
-    loading: "bg-blue-900/90 border-blue-700 text-blue-100",
+    success: "bg-emerald-300/15 border-emerald-100/30 text-emerald-100",
+    error: "bg-rose-300/15 border-rose-100/30 text-rose-100",
+    loading: "bg-sky-300/15 border-sky-100/30 text-sky-100",
   }[type];
 
   const icon = {
@@ -53,7 +53,7 @@ export function Notification({
               href={`https://celoscan.io/tx/${txHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-blue-400 hover:text-blue-300 mt-1 inline-block"
+              className="text-xs text-emerald-200 hover:text-emerald-100 mt-1 inline-block"
             >
               View on CeloScan →
             </a>
@@ -62,7 +62,7 @@ export function Notification({
         {onClose && (
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white text-lg leading-none"
+            className="text-slate-300 hover:text-white text-lg leading-none"
           >
             ×
           </button>

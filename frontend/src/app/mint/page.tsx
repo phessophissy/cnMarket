@@ -28,18 +28,20 @@ export default function MintPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">Mint NFT</h1>
-          <p className="text-gray-400 mt-1">
+      <main className="max-w-5xl mx-auto px-4 py-10">
+        <div className="mb-10 glass-surface rounded-3xl p-6 md:p-8">
+          <h1 className="text-4xl font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
+            Mint Your Next Drop
+          </h1>
+          <p className="text-slate-200/85 mt-2">
             Choose a rarity level and mint your unique NFT on Celo
           </p>
         </div>
 
         {!isConnected ? (
-          <div className="text-center py-20 bg-gray-900 rounded-xl border border-gray-800">
+          <div className="text-center py-20 glass-surface rounded-3xl border border-emerald-100/10">
             <p className="text-5xl mb-4">🔗</p>
-            <p className="text-gray-400">Connect your wallet to mint NFTs</p>
+            <p className="text-slate-300">Connect your wallet to mint NFTs</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -51,30 +53,30 @@ export default function MintPage() {
               return (
                 <div
                   key={rarity}
-                  className={`bg-gray-800 rounded-xl overflow-hidden border transition-all ${
+                  className={`glass-surface rounded-2xl overflow-hidden border transition-all ${
                     isActive
-                      ? `${colors.border} ring-2 ring-offset-2 ring-offset-gray-950`
-                      : "border-gray-700 hover:border-gray-500"
+                      ? `${colors.border} ring-2 ring-offset-2 ring-offset-[#071b22]`
+                      : "border-emerald-100/10 hover:border-emerald-100/35"
                   }`}
                 >
                   <div
                     className={`h-40 bg-gradient-to-br ${colors.gradient} flex items-center justify-center`}
                   >
-                    <span className="text-4xl font-bold text-white/30">
+                    <span className="text-4xl font-bold text-white/35">
                       {RARITY_LABELS[rarity]}
                     </span>
                   </div>
                   <div className="p-6 space-y-4">
                     <div className="flex items-center justify-between">
                       <RarityBadge rarity={rarity} />
-                      <span className="text-green-400 font-bold text-lg">
+                      <span className="text-emerald-200 font-bold text-lg">
                         {MINT_PRICE_DISPLAY[rarity]} CELO
                       </span>
                     </div>
                     <button
                       onClick={() => handleMint(rarity)}
                       disabled={isPending || isConfirming}
-                      className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
+                      className="w-full bg-gradient-to-r from-emerald-300 to-teal-300 hover:brightness-105 disabled:opacity-50 disabled:cursor-not-allowed text-[#073631] py-3 rounded-lg font-semibold transition"
                     >
                       {isPending && selectedRarity === rarity
                         ? "Confirm in wallet..."

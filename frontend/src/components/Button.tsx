@@ -11,9 +11,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  primary: "bg-green-600 hover:bg-green-700 text-white",
-  secondary: "bg-gray-700 hover:bg-gray-600 text-white",
-  danger: "bg-red-600 hover:bg-red-700 text-white",
+  primary: "bg-gradient-to-r from-emerald-300 to-teal-300 hover:brightness-105 text-[#063d37]",
+  secondary: "bg-emerald-200/10 border border-emerald-100/20 hover:bg-emerald-200/15 text-emerald-50",
+  danger: "bg-rose-300/20 border border-rose-100/20 hover:bg-rose-300/30 text-rose-100",
 };
 
 const buttonSizes = {
@@ -35,7 +35,7 @@ export function Button({
   return (
     <button
       disabled={disabled || loading}
-      className={`${variants[variant]} ${buttonSizes[size]} rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 ${className}`}
+      className={`${variants[variant]} ${buttonSizes[size]} rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 ${className}`}
       {...props}
     >
       {loading && <Spinner size="sm" />}

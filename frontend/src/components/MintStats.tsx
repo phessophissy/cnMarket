@@ -11,9 +11,9 @@ export function MintStats({ totalMinted, commonCount, rareCount, legendaryCount 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
       {stats.map((s) => (
-        <div key={s.label} className="bg-gray-800 rounded-xl p-3 text-center border border-gray-700">
+        <div key={s.label} className="glass-surface rounded-xl p-3 text-center border border-emerald-100/10">
           <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
-          <div className="text-gray-400 text-xs mt-1">{s.label}</div>
+          <div className="text-slate-300 text-xs mt-1">{s.label}</div>
         </div>
       ))}
     </div>

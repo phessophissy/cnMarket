@@ -23,10 +23,10 @@ export function StatsBar() {
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center"
+          className="glass-surface border border-emerald-100/10 rounded-xl p-4 text-center"
         >
-          <p className="text-2xl font-bold text-green-400">{stat.value}</p>
-          <p className="text-gray-400 text-sm mt-1">{stat.label}</p>
+          <p className="text-2xl font-bold text-emerald-200">{stat.value}</p>
+          <p className="text-slate-300 text-sm mt-1">{stat.label}</p>
         </div>
       ))}
     </div>

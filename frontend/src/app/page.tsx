@@ -50,12 +50,34 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">NFT Marketplace</h1>
-          <p className="text-gray-400 mt-1">
-            Browse and buy NFTs listed by other collectors
-          </p>
+      <main className="max-w-7xl mx-auto px-4 py-10 md:py-12">
+        <div className="glass-surface rounded-3xl p-6 md:p-10 mb-10 overflow-hidden relative">
+          <div className="absolute -right-20 -top-20 h-56 w-56 bg-emerald-300/20 blur-3xl rounded-full" />
+          <div className="absolute -left-24 -bottom-20 h-56 w-56 bg-teal-300/20 blur-3xl rounded-full" />
+          <div className="relative grid gap-8 md:grid-cols-[1.3fr_1fr] md:items-end">
+            <div>
+              <p className="uppercase tracking-[0.2em] text-xs text-emerald-100/75 mb-4">Celo NFT Marketplace</p>
+              <h1
+                className="text-4xl md:text-5xl font-semibold leading-tight"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Trade rare drops with <span className="text-gradient">instant finality</span>
+              </h1>
+              <p className="text-slate-200/85 mt-4 max-w-2xl leading-7">
+                Explore active listings, discover rarity tiers, and buy directly from collectors on-chain.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="rounded-2xl border border-emerald-100/20 bg-emerald-200/10 p-4">
+                <p className="text-slate-300">Active Listings</p>
+                <p className="text-2xl font-semibold mt-1">{listingCount}</p>
+              </div>
+              <div className="rounded-2xl border border-emerald-100/20 bg-emerald-200/10 p-4">
+                <p className="text-slate-300">Chain</p>
+                <p className="text-2xl font-semibold mt-1">Celo</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {isLoading ? (
@@ -65,12 +87,12 @@ export default function HomePage() {
             ))}
           </div>
         ) : listingCount === 0 ? (
-          <div className="text-center py-20 bg-gray-900 rounded-xl border border-gray-800">
+          <div className="text-center py-20 glass-surface rounded-3xl border border-emerald-100/10">
             <p className="text-5xl mb-4">🏪</p>
-            <p className="text-gray-400 text-lg">No NFTs listed yet.</p>
+            <p className="text-slate-200 text-lg">No NFTs listed yet.</p>
             <a
               href="/mint"
-              className="text-green-400 hover:text-green-300 mt-2 inline-block font-medium"
+              className="text-emerald-200 hover:text-emerald-100 mt-3 inline-block font-medium"
             >
               Mint your first NFT →
             </a>

@@ -12,7 +12,7 @@ export function ExternalLink({ href, children, className = "" }: ExternalLinkPro
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-1 hover:text-green-400 transition-colors ${className}`}
+      className={`inline-flex items-center gap-1 hover:text-emerald-100 transition-colors ${className}`}
     >
       {children}
       <span className="text-xs">↗</span>

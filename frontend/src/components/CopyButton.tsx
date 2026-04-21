@@ -26,7 +26,7 @@ export function CopyButton({ text, label, className = "" }: CopyButtonProps) {
   return (
     <button aria-label="interactive-element"
       onClick={handleCopy}
-      className={`text-gray-400 hover:text-white transition-colors text-sm ${className}`}
+      className={`text-slate-300 hover:text-emerald-100 transition-colors text-sm ${className}`}
       title="Copy to clipboard"
     >
       {copied ? "✓ Copied!" : label || "Copy"}

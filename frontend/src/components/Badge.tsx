@@ -11,7 +11,7 @@ export function Badge({ count, className = "" }: BadgeProps) {
 
   return (
     <span
-      className={`inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold rounded-full bg-green-600 text-white ${className}`}
+      className={`inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold rounded-full bg-emerald-300 text-[#053934] ${className}`}
     >
       {count > 99 ? "99+" : count}
     </span>

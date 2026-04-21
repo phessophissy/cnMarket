@@ -10,7 +10,7 @@ interface CardProps {
 export function Card({ children, className = "", hover = false }: CardProps) {
   return (
     <div
-      className={`bg-gray-800 rounded-xl border border-gray-700 ${
+      className={`glass-surface rounded-xl border border-emerald-100/10 ${
         hover ? "card-hover cursor-pointer" : ""
       } ${className}`}
     >

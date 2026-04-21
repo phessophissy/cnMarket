@@ -22,20 +22,20 @@ export function ConnectPrompt({ message = "Connect your wallet to continue" }: {
 
   if (isMiniPay) {
     return (
-      <div className="text-center py-20 bg-gray-900 rounded-xl border border-gray-800">
+      <div className="text-center py-20 glass-surface rounded-2xl border border-emerald-100/10">
         <p className="text-5xl mb-4">⚡</p>
-        <p className="text-gray-400 mb-2">Connecting via MiniPay...</p>
-        <div className="w-8 h-8 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-slate-300 mb-2">Connecting via MiniPay...</p>
+        <div className="w-8 h-8 border-2 border-amber-200/60 border-t-transparent rounded-full animate-spin mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="text-center py-20 bg-gray-900 rounded-xl border border-gray-800">
+    <div className="text-center py-20 glass-surface rounded-2xl border border-emerald-100/10">
       <p className="text-5xl mb-4">🔗</p>
-      <p className="text-gray-400 mb-4">{message}</p>
+      <p className="text-slate-300 mb-4">{message}</p>
       <button onClick={handleConnect}
-        className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+        className="bg-gradient-to-r from-emerald-300 to-teal-300 hover:brightness-105 text-[#063b35] px-6 py-3 rounded-lg font-semibold transition">
         Connect Wallet
       </button>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: add NFT ownership verification hook Panel
-/** Component update 9-5 */
+/** Component update 42-8 */
 export const Nft_ownership_verifyPanel = () => (
   <div className="minipay-panel">feat: add NFT ownership verification hook</div>
 );

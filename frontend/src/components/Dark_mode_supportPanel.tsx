@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: add dark mode support for MiniPay UI Panel
-/** Component update 15-1 */
+/** Component update 50-8 */
 export const Dark_mode_supportPanel = () => (
   <div className="minipay-panel">feat: add dark mode support for MiniPay UI</div>
 );

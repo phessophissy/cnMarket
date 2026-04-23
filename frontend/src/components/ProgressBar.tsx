@@ -4,7 +4,7 @@ interface ProgressBarProps {
   className?: string;
 }
 
-/** Component update 38-4 */
+/** Component update 49-9 */
 export function ProgressBar({ value, max, className = "" }: ProgressBarProps) {
   const percentage = max > 0 ? Math.min((value / max) * 100, 100) : 0;
 

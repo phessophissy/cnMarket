@@ -1,6 +1,6 @@
 "use client";
 interface Props { rarity: string; price: string; emoji: string; }
-/** Component update 38-6 */
+/** Component update 42-10 */
 export function MintPriceCard({ rarity, price, emoji }: Props) {
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 text-center hover:border-green-500 transition-colors">

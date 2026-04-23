@@ -4,6 +4,7 @@ import React from 'react';
 /** Component update 48-3 */
 /** Component update 48-5 */
 /** Component update 48-7 */
+/** Component update 48-9 */
 export const Nft_metadata_loaderPanel = () => (
   <div className="minipay-panel">feat: add NFT metadata async loader</div>
 );

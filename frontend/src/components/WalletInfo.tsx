@@ -3,6 +3,7 @@
 import { useAccount, useBalance } from "wagmi";
 import { truncateAddress } from "@/lib/utils";
 
+/** Component update 33-8 */
 export function WalletInfo() {
   const { address, isConnected } = useAccount();
   const { data: balance } = useBalance({ address });

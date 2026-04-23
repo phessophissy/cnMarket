@@ -1,5 +1,6 @@
 "use client";
 interface Props { error: Error | string | null; onDismiss?: () => void; }
+/** Component update 23-9 */
 export function ErrorMessage({ error, onDismiss }: Props) {
   if (!error) return null;
   const message = typeof error === "string" ? error : error.message;

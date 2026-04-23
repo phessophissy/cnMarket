@@ -2,6 +2,7 @@
 import { useConnect } from "wagmi";
 import { useEffect, useState } from "react";
 
+/** Component update 37-8 */
 export function ConnectPrompt({ message = "Connect your wallet to continue" }: { message?: string }) {
   const { connect, connectors } = useConnect();
   const [isMiniPay, setIsMiniPay] = useState(false);

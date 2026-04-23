@@ -6,7 +6,7 @@ interface ExternalLinkProps {
   className?: string;
 }
 
-/** Component update 34-9 */
+/** Component update 44-7 */
 export function ExternalLink({ href, children, className = "" }: ExternalLinkProps) {
   return (
     <a

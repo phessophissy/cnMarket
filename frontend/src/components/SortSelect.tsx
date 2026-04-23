@@ -5,6 +5,7 @@ interface SortSelectProps {
   onChange: (value: string) => void;
 }
 
+/** Component update 12-5 */
 export function SortSelect({ value, onChange }: SortSelectProps) {
   return (
     <select

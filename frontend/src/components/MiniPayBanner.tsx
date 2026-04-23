@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 
 /** Component update 27-1 */
+/** Component update 27-8 */
 export function MiniPayBanner() {
   const [isMiniPay, setIsMiniPay] = useState(false);
   useEffect(() => {

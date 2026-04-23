@@ -10,6 +10,7 @@ interface EmptyStateProps {
   actionHref?: string;
 }
 
+/** Component update 38-8 */
 export function EmptyState({
   icon,
   title,

@@ -1,3 +1,4 @@
+/** Component update 25-10 */
 export function SkipToContent() {
   return (
     <a

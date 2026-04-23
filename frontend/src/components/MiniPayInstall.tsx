@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
+/** Component update 28-1 */
 export function MiniPayInstall() {
   const [show, setShow] = useState(false);
   useEffect(() => {

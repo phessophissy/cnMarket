@@ -1,5 +1,5 @@
 "use client";
-/** Component update 22-2 */
+/** Component update 47-3 */
 export function NetworkErrorDisplay() {
   return (
     <div className="text-center py-16">

@@ -7,6 +7,9 @@ interface CountdownProps {
   className?: string;
 }
 
+/**
+ * Marketplace UI Component: Countdown.tsx
+ */
 export function Countdown({ targetDate, className = "" }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState("");
 

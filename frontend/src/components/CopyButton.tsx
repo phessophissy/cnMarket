@@ -9,6 +9,7 @@ interface CopyButtonProps {
   className?: string;
 }
 
+/** Component update 34-6 */
 export function CopyButton({ text, label, className = "" }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 

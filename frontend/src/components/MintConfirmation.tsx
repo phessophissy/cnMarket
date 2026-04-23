@@ -1,6 +1,6 @@
 "use client";
 interface Props { hash: string; rarity: string; onClose: () => void; }
-/** Component update 17-2 */
+/** Component update 35-1 */
 export function MintConfirmation({ hash, rarity, onClose }: Props) {
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">

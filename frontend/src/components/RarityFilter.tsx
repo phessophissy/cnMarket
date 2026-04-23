@@ -7,7 +7,7 @@ interface RarityFilterProps {
   onChange: (rarity: number | null) => void;
 }
 
-/** Component update 19-3 */
+/** Component update 31-8 */
 export function RarityFilter({ selected, onChange }: RarityFilterProps) {
   return (
     <div className="flex flex-wrap gap-2">

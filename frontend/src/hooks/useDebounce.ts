@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-/** Hook update 19-9 */
+/** Hook update 46-8 */
 export function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
 

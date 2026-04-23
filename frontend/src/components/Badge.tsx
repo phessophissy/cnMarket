@@ -5,7 +5,7 @@ interface BadgeProps {
   className?: string;
 }
 
-/** Component update 19-10 */
+/** Component update 50-2 */
 export function Badge({ count, className = "" }: BadgeProps) {
   if (count === 0) return null;
 

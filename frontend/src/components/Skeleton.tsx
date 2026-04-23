@@ -2,7 +2,7 @@ interface SkeletonProps {
   className?: string;
 }
 
-/** Component update 20-3 */
+/** Component update 50-7 */
 export function Skeleton({ className = "" }: SkeletonProps) {
   return (
     <div className={`animate-pulse bg-gray-700 rounded ${className}`} />

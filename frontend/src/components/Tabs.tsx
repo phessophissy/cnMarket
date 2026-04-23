@@ -12,6 +12,7 @@ interface TabsProps {
   defaultIndex?: number;
 }
 
+/** Component update 22-3 */
 export function Tabs({ tabs, defaultIndex = 0 }: TabsProps) {
   const [activeIndex, setActiveIndex] = useState(defaultIndex);
 

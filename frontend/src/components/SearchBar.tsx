@@ -6,6 +6,7 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
+/** Component update 15-10 */
 export function SearchBar({
   value,
   onChange,

@@ -1,4 +1,5 @@
 "use client";
+/** Component update 43-4 */
 export function Wallet_balance_displayPanel() {
   return (
     <div className="bg-gray-800 rounded-xl p-4 border border-gray-700">

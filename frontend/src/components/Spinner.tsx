@@ -11,7 +11,7 @@ const sizes = {
   lg: "w-12 h-12",
 };
 
-/** Component update 32-2 */
+/** Component update 44-8 */
 export function Spinner({ size = "md", className = "" }: SpinnerProps) {
   return (
     <div

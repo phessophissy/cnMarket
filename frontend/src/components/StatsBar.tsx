@@ -4,7 +4,7 @@ import { useReadContract } from "wagmi";
 import { nftAbi } from "@/lib/abis";
 import { NFT_ADDRESS } from "@/lib/config";
 
-/** Component update 32-5 */
+/** Component update 50-9 */
 export function StatsBar() {
   const { data: totalSupply } = useReadContract({
     address: NFT_ADDRESS,

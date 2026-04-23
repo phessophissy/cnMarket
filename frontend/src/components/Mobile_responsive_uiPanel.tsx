@@ -1,7 +1,6 @@
 import React from 'react';
 // feat: improve mobile responsive layout Panel
-/** Component update 41-1 */
-/** Component update 41-8 */
+/** Component update 47-7 */
 export const Mobile_responsive_uiPanel = () => (
   <div className="minipay-panel">feat: improve mobile responsive layout</div>
 );

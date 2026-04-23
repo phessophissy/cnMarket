@@ -10,7 +10,11 @@ interface AddressDisplayProps {
   className?: string;
 }
 
-/** Component update 41-7 */
+/** Component update 48-2 */
+/** Component update 48-4 */
+/** Component update 48-6 */
+/** Component update 48-8 */
+/** Component update 48-10 */
 export function AddressDisplay({
   address,
   truncate = true,

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useState, useEffect } from "react";
 
+/** Component update 21-2 */
 export function Navbar() {
   const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect();

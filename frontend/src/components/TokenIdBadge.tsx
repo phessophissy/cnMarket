@@ -3,7 +3,7 @@ interface TokenIdBadgeProps {
   className?: string;
 }
 
-/** Component update 37-7 */
+/** Component update 41-4 */
 export function TokenIdBadge({ id, className = "" }: TokenIdBadgeProps) {
   return (
     <span className={`font-mono text-sm bg-gray-700 px-2 py-0.5 rounded ${className}`}>

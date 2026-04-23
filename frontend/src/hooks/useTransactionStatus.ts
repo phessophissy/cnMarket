@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import type { TransactionStatus } from "@/lib/types";
 
-/** Hook update 30-3 */
+/** Hook update 42-9 */
 export function useTransactionStatus() {
   const [status, setStatus] = useState<TransactionStatus>("idle");
   const [hash, setHash] = useState<string | undefined>();

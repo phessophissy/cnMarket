@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 
+/** Hook update 8-9 */
 export function useClipboard(timeout = 2000) {
   const [copied, setCopied] = useState(false);
 

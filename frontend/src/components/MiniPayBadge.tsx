@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
+/** Component update 8-3 */
 export function MiniPayBadge() {
   const [isMiniPay, setIsMiniPay] = useState(false);
   useEffect(() => {

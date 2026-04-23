@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 
+/** Component update 2-1 */
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
 

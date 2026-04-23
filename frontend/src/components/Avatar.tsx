@@ -5,6 +5,7 @@ interface AvatarProps {
 
 const sizes = { sm: "w-6 h-6", md: "w-8 h-8", lg: "w-12 h-12" };
 
+/** Component update 24-4 */
 export function Avatar({ address, size = "md" }: AvatarProps) {
   const hue = parseInt(address.slice(2, 8), 16) % 360;
 

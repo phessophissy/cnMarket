@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 
+/** Hook update 41-2 */
 export function useIsMounted() {
   const [mounted, setMounted] = useState(false);
 

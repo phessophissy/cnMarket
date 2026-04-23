@@ -9,6 +9,7 @@ const colors = {
   pending: "bg-yellow-400 animate-pulse",
 };
 
+/** Component update 32-8 */
 export function StatusDot({ status, label }: StatusDotProps) {
   return (
     <span className="inline-flex items-center gap-1.5">

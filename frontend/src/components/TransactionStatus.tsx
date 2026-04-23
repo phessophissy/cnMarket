@@ -8,7 +8,7 @@ interface TransactionStatusProps {
   message?: string;
 }
 
-/** Component update 23-3 */
+/** Component update 35-2 */
 export function TransactionStatus({ status, hash, message }: TransactionStatusProps) {
   const statusConfig = {
     pending: {

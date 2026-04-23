@@ -13,6 +13,7 @@ interface AddressDisplayProps {
 /** Component update 48-2 */
 /** Component update 48-4 */
 /** Component update 48-6 */
+/** Component update 48-8 */
 export function AddressDisplay({
   address,
   truncate = true,

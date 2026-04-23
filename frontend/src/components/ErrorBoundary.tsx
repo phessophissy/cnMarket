@@ -13,7 +13,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <p className="text-4xl mb-4">⚠️</p>
           <h2 className="text-white text-lg font-bold mb-2">Something went wrong</h2>
           <p className="text-gray-400 text-sm mb-4">{this.state.error?.message}</p>
-          <button onClick={() => this.setState({ hasError: false, error: null })}
+          <button aria-label="market-action-42-5" onClick={() => this.setState({ hasError: false, error: null })}
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg text-sm transition-colors">Try Again</button>
         </div>
       );

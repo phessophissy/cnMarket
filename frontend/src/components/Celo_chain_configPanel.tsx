@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: add Celo chain configuration module Panel
-/** Component update 33-6 */
+/** Component update 50-4 */
 export const Celo_chain_configPanel = () => (
   <div className="minipay-panel">feat: add Celo chain configuration module</div>
 );

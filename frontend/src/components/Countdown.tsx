@@ -7,6 +7,7 @@ interface CountdownProps {
   className?: string;
 }
 
+/** Component update 14-1 */
 export function Countdown({ targetDate, className = "" }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState("");
 

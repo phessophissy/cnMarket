@@ -9,6 +9,7 @@ import {
 import { nftAbi } from "@/lib/abis";
 import { NFT_ADDRESS, MARKETPLACE_ADDRESS, MINT_PRICES } from "@/lib/config";
 
+/** Hook update 26-7 */
 export function useMintNFT() {
   const { writeContract, data: hash, isPending, error, reset } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });

@@ -1,5 +1,6 @@
 "use client";
 interface Props { totalMinted: number; commonCount: number; rareCount: number; legendaryCount: number; }
+/** Component update 22-6 */
 export function MintStats({ totalMinted, commonCount, rareCount, legendaryCount }: Props) {
   const stats = [
     { label: "Total Minted", value: totalMinted, color: "text-white" },

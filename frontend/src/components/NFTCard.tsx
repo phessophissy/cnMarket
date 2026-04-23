@@ -13,6 +13,7 @@ interface NFTCardProps {
   showListButton?: boolean;
 }
 
+/** Component update 28-5 */
 export function NFTCard({
   tokenId,
   rarity,

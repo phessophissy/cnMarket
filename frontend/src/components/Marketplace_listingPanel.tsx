@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: add marketplace listing component Panel
-/** Component update 36-6 */
+/** Component update 39-8 */
 export const Marketplace_listingPanel = () => (
   <div className="minipay-panel">feat: add marketplace listing component</div>
 );

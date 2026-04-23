@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-/** Component update 39-3 */
+/** Component update 45-9 */
 export function Footer() {
   return (
     <footer className="bg-gray-900 border-t border-gray-800 mt-auto">

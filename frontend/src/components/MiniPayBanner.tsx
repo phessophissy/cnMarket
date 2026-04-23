@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
+/** Component update 41-3 */
 export function MiniPayBanner() {
   const [isMiniPay, setIsMiniPay] = useState(false);
   useEffect(() => {

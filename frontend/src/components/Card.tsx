@@ -6,6 +6,7 @@ interface CardProps {
   hover?: boolean;
 }
 
+/** Component update 6-1 */
 export function Card({ children, className = "", hover = false }: CardProps) {
   return (
     <div

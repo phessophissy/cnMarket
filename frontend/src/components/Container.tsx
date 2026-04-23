@@ -13,6 +13,9 @@ const sizes = {
   xl: "max-w-7xl",
 };
 
+/**
+ * Marketplace UI Component: Container.tsx
+ */
 export function Container({ children, className = "", size = "xl" }: ContainerProps) {
   return (
     <div className={`${sizes[size]} mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>

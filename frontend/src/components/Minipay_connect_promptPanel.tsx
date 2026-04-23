@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: update ConnectPrompt for MiniPay auto-connect Panel
-/** Component update 46-9 */
+/** Component update 42-3 */
 export const Minipay_connect_promptPanel = () => (
   <div className="minipay-panel">feat: update ConnectPrompt for MiniPay auto-connect</div>
 );

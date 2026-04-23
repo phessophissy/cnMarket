@@ -5,6 +5,7 @@ const rarities = [
   { id: 2 as const, name: "Legendary", price: "0.05", emoji: "🌟", desc: "The rarest and most valuable" },
 ];
 interface Props { onSelect: (r: 0|1|2) => void; selected: 0|1|2; }
+/** Component update 38-1 */
 export function MintRaritySelector({ onSelect, selected }: Props) {
   return (
     <div className="space-y-3">

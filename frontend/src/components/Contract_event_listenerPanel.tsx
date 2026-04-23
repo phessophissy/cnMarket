@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: add contract event listener hook Panel
-/** Component update 12-1 */
+/** Component update 44-9 */
 export const Contract_event_listenerPanel = () => (
   <div className="minipay-panel">feat: add contract event listener hook</div>
 );

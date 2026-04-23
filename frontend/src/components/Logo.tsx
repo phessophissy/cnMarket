@@ -6,6 +6,7 @@ interface LogoProps {
 
 const textSizes = { sm: "text-lg", md: "text-xl", lg: "text-2xl" };
 
+/** Component update 4-5 */
 export function Logo({ size = "md" }: LogoProps) {
   return (
     <Link href="/" className={`text-white font-bold ${textSizes[size]} flex items-center gap-2`}>

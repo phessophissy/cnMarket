@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: add loading skeleton UI components Panel
-/** Component update 21-10 */
+/** Component update 43-5 */
 export const Loading_skeleton_uiPanel = () => (
   <div className="minipay-panel">feat: add loading skeleton UI components</div>
 );

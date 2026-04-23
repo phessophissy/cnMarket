@@ -1,6 +1,6 @@
 import React from 'react';
 // feat: add typed contract ABI definitions Panel
-/** Component update 21-5 */
+/** Component update 50-6 */
 export const Contract_abi_typesPanel = () => (
   <div className="minipay-panel">feat: add typed contract ABI definitions</div>
 );

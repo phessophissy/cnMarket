@@ -11,6 +11,7 @@ interface NotificationProps {
   onClose?: () => void;
 }
 
+/** Component update 16-9 */
 export function Notification({
   type,
   message,

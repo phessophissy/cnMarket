@@ -7,6 +7,7 @@ interface PriceInputProps {
   disabled?: boolean;
 }
 
+/** Component update 30-5 */
 export function PriceInput({
   value,
   onChange,

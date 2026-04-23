@@ -2,6 +2,7 @@
 
 import { useAccount } from "wagmi";
 
+/** Component update 14-3 */
 export function NetworkBadge() {
   const { chain, isConnected } = useAccount();
 

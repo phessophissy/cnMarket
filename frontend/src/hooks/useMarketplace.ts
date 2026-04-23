@@ -8,6 +8,7 @@ import {
 import { marketplaceAbi } from "@/lib/abis";
 import { MARKETPLACE_ADDRESS } from "@/lib/config";
 
+/** Hook update 42-2 */
 export function useListNFT() {
   const { writeContract, data: hash, isPending, error, reset } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });

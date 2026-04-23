@@ -22,7 +22,7 @@ const buttonSizes = {
   lg: "px-6 py-3",
 };
 
-/** Component update 2-2 */
+/** Component update 49-6 */
 export function Button({
   variant = "primary",
   size = "md",

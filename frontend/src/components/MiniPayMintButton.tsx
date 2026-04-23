@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 interface Props { rarity: 0|1|2; price: string; label: string; onMint: (r: 0|1|2) => void; disabled?: boolean; }
-/** Component update 14-2 */
+/** Component update 35-9 */
 export function MiniPayMintButton({ rarity, price, label, onMint, disabled }: Props) {
   const [loading, setLoading] = useState(false);
   const handleMint = () => { setLoading(true); try { onMint(rarity); } finally { setTimeout(() => setLoading(false), 2000); } };

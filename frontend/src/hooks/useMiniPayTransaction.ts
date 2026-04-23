@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 
 export type MiniPayTxStatus = "idle" | "pending" | "success" | "error";
 
-/** Hook update 44-2 */
+/** Hook update 47-8 */
 export function useMiniPayTransaction() {
   const { address } = useAccount();
   const [status, setStatus] = useState<MiniPayTxStatus>("idle");

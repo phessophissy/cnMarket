@@ -2,6 +2,7 @@
 
 import { useAccount, useBalance as useWagmiBalance } from "wagmi";
 
+/** Hook update 7-10 */
 export function useCeloBalance() {
   const { address } = useAccount();
 

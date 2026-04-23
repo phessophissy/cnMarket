@@ -9,6 +9,7 @@ interface ModalProps {
   children: ReactNode;
 }
 
+/** Component update 46-3 */
 export function Modal({ isOpen, onClose, title, children }: ModalProps) {
   useEffect(() => {
     if (isOpen) {

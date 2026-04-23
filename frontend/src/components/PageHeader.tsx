@@ -4,6 +4,7 @@ interface PageHeaderProps {
 }
 
 /** Component update 27-2 */
+/** Component update 27-9 */
 export function PageHeader({ title, subtitle }: PageHeaderProps) {
   return (
     <div className="mb-8">

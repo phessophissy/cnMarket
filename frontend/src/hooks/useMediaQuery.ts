@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-/** Hook update 28-3 */
+/** Hook update 36-5 */
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
 

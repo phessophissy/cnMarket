@@ -1,7 +1,7 @@
 "use client";
 interface Item { tokenId: string; rarity: string; hash: string; }
 interface Props { items: Item[]; }
-/** Component update 26-5 */
+/** Component update 44-3 */
 export function MintHistory({ items }: Props) {
   if (!items.length) return <div className="text-center py-8 text-gray-500 text-sm">No minting history yet</div>;
   return (

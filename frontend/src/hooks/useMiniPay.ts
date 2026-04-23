@@ -11,6 +11,7 @@ export interface MiniPayState {
   connect: () => void;
 }
 
+/** Hook update 21-4 */
 export function useMiniPay(): MiniPayState {
   const [isMiniPay, setIsMiniPay] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

@@ -13,6 +13,7 @@ const styles = {
   success: "bg-green-500/10 border-green-500/20 text-green-400",
 };
 
+/** Component update 10-9 */
 export function Alert({ type, children, className = "" }: AlertProps) {
   return (
     <div className={`border rounded-lg p-4 text-sm ${styles[type]} ${className}`}>

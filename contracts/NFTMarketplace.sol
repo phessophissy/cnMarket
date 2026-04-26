@@ -26,6 +26,7 @@ contract NFTMarketplace is ReentrancyGuard {
         nftContract = IERC721(_nftContract);
     }
 
+    /** @notice Contract update 38-5 */
     function listNFT(uint256 tokenId, uint256 price) external {
         require(price > 0, "Price must be greater than 0");
         require(nftContract.ownerOf(tokenId) == msg.sender, "Not the owner");

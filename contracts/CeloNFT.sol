@@ -30,6 +30,7 @@ contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
         _rarityURIs[Rarity.Legendary] = legendaryURI;
     }
 
+    /** @notice Contract update 47-2 */
     function mint(Rarity rarity) external payable {
         require(msg.value == mintPrices[rarity], "Incorrect CELO amount");
 

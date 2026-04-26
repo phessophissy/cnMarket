@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+/** Component update 45-9 */
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-emerald-200/15 bg-[#081d25]/65 backdrop-blur-md">

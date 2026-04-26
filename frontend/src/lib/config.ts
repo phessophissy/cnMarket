@@ -1,13 +1,19 @@
 import { ZERO_ADDRESS } from "./constants";
-export const USDM_ADDRESS = (process.env.NEXT_PUBLIC_USDM_ADDRESS ||
-  "0x0000000000000000000000000000000000000000") as `0x${string}`;
+import { isAddress } from "viem";
 
-export const NFT_ADDRESS = (process.env.NEXT_PUBLIC_NFT_ADDRESS ||
-  "0x0000000000000000000000000000000000000000") as `0x${string}`;
+function readAddress(value: string | undefined): `0x${string}` {
+  const cleaned = (value || "").trim().replace(/^['"]|['"]$/g, "");
+  if (isAddress(cleaned)) return cleaned as `0x${string}`;
+  return ZERO_ADDRESS;
+}
 
-export const MARKETPLACE_ADDRESS = (process.env
-  .NEXT_PUBLIC_MARKETPLACE_ADDRESS ||
-  "0x0000000000000000000000000000000000000000") as `0x${string}`;
+export const USDM_ADDRESS = readAddress(process.env.NEXT_PUBLIC_USDM_ADDRESS);
+
+export const NFT_ADDRESS = readAddress(process.env.NEXT_PUBLIC_NFT_ADDRESS);
+
+export const MARKETPLACE_ADDRESS = readAddress(
+  process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS
+);
 
 export const RARITY_LABELS = ["Common", "Rare", "Legendary"] as const;
 

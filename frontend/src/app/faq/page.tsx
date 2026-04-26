@@ -10,7 +10,7 @@ const faqs = [
   },
   {
     q: "How much does it cost to mint?",
-    a: "Common NFTs cost 0.01 CELO, Rare NFTs cost 0.03 CELO, and Legendary NFTs cost 0.05 CELO. Plus a small gas fee.",
+    a: "Common NFTs cost 0.01 USDm, Rare NFTs cost 0.03 USDm, and Legendary NFTs cost 0.05 USDm. Plus a small gas fee.",
   },
   {
     q: "What wallets are supported?",
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "How do I list my NFT for sale?",
-    a: "Go to 'My NFTs', click on the NFT you want to sell, and click 'List for Sale'. Set your price in CELO and confirm the transaction.",
+    a: "Go to 'My NFTs', click on the NFT you want to sell, and click 'List for Sale'. Set your price in USDm and confirm the transaction.",
   },
   {
     q: "Are the smart contracts verified?",

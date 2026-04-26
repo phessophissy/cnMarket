@@ -17,7 +17,7 @@ export function MintRaritySelector({ onSelect, selected }: Props) {
             <div className="text-white font-medium">{r.name}</div>
             <div className="text-gray-400 text-xs">{r.desc}</div>
           </div>
-          <span className="text-green-400 font-mono text-sm">{r.price} CELO</span>
+          <span className="text-green-400 font-mono text-sm">{r.price} USDm</span>
         </button>
       ))}
     </div>

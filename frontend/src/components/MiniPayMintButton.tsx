@@ -10,7 +10,7 @@ export function MiniPayMintButton({ rarity, price, label, onMint, disabled }: Pr
     <button onClick={handleMint} disabled={disabled || loading}
       className={`w-full bg-gradient-to-r ${colors[rarity]} text-white py-4 px-6 rounded-xl font-medium transition-all disabled:opacity-50 active:scale-95`}>
       {loading ? <span className="flex items-center justify-center gap-2"><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Minting...</span>
-        : <span className="flex items-center justify-between"><span>Mint {label}</span><span className="text-sm opacity-80">{price} CELO</span></span>}
+        : <span className="flex items-center justify-between"><span>Mint {label}</span><span className="text-sm opacity-80">{price} USDm</span></span>}
     </button>
   );
 }

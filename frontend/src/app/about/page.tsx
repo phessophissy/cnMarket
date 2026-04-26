@@ -22,7 +22,7 @@ export default function AboutPage() {
     {
       icon: "⚡",
       title: "Low Gas Fees",
-      description: "Built on Celo for fast, affordable transactions. Mint for as low as 0.01 CELO.",
+      description: "Built on Celo for fast, affordable transactions. Mint for as low as 0.01 USDm.",
     },
     {
       icon: "📱",

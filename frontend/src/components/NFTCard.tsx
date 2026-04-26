@@ -45,7 +45,7 @@ export function NFTCard({
             <div className="flex items-center justify-between">
               <span className="text-slate-300 text-sm">Price</span>
               <span className="text-emerald-200 font-semibold">
-                {formatEther(price)} CELO
+                {formatEther(price)} USDm
               </span>
             </div>
           )}

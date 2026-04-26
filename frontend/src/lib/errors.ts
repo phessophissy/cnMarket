@@ -19,3 +19,13 @@ export function getErrorMessage(error: unknown): string {
 export function isUserRejection(error: unknown): boolean {
   return error instanceof Error && (error.message.toLowerCase().includes("user rejected") || error.message.toLowerCase().includes("user denied"));
 }
+export function parseContractError(error: unknown): string {
+  if (error instanceof Error) {
+    const msg = error.message;
+    const match = msg.match(/reason: (.+?)(?:\n|$)/) || msg.match(/reverted with reason string '(.+?)'/);
+    if (match) return match[1];
+    if (msg.includes("user rejected")) return "Transaction cancelled by user";
+    return msg.slice(0, 120);
+  }
+  return "An unexpected error occurred";
+}

@@ -6,25 +6,70 @@ import {
   useReadContract,
   useAccount,
 } from "wagmi";
-import { nftAbi } from "@/lib/abis";
-import { NFT_ADDRESS, MARKETPLACE_ADDRESS, MINT_PRICES } from "@/lib/config";
+import { nftAbi, erc20Abi } from "@/lib/abis";
+import { NFT_ADDRESS, MARKETPLACE_ADDRESS, MINT_PRICES, USDM_ADDRESS } from "@/lib/config";
 
 /** Hook update 40-7 */
-export function useMintNFT() {
-  const { writeContract, data: hash, isPending, error, reset } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
+export function useMintNFT(rarity: 0 | 1 | 2) {
+  const { address } = useAccount();
+  const { writeContract: writeMint, data: mintHash, isPending: isMintPending, error: mintError, reset: resetMint } = useWriteContract();
+  const { writeContract: writeApprove, data: approveHash, isPending: isApprovePending, error: approveError, reset: resetApprove } = useWriteContract();
 
-  const mint = (rarity: 0 | 1 | 2) => {
-    writeContract({
+  const { isLoading: isMintConfirming, isSuccess: isMintSuccess } = useWaitForTransactionReceipt({ hash: mintHash });
+  const { isLoading: isApproveConfirming, isSuccess: isApproveSuccess } = useWaitForTransactionReceipt({ hash: approveHash });
+
+  const { data: allowance, refetch: refetchAllowance } = useReadContract({
+    address: USDM_ADDRESS,
+    abi: erc20Abi,
+    functionName: "allowance",
+    args: address ? [address, NFT_ADDRESS] : undefined,
+    query: { enabled: !!address },
+  });
+
+  const price = MINT_PRICES[rarity];
+  const needsApproval = allowance === undefined || allowance < price;
+
+  const approve = () => {
+    writeApprove({
+      address: USDM_ADDRESS,
+      abi: erc20Abi,
+      functionName: "approve",
+      args: [NFT_ADDRESS, price],
+    });
+  };
+
+  const mint = () => {
+    writeMint({
       address: NFT_ADDRESS,
       abi: nftAbi,
       functionName: "mint",
       args: [rarity],
-      value: MINT_PRICES[rarity],
     });
   };
 
-  return { mint, hash, isPending, isConfirming, isSuccess, error, reset };
+  const reset = () => {
+    resetMint();
+    resetApprove();
+  };
+
+  return {
+    mint,
+    approve,
+    needsApproval,
+    refetchAllowance,
+    mintHash,
+    approveHash,
+    isMintPending,
+    isApprovePending,
+    isMintConfirming,
+    isApproveConfirming,
+    isMintSuccess,
+    isApproveSuccess,
+    mintError,
+    approveError,
+    error: mintError || approveError,
+    reset,
+  };
 }
 
 export function useApproveNFT() {

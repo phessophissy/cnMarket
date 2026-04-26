@@ -164,12 +164,12 @@ export default function ListNFTPage() {
                     <span className="text-green-400 font-medium">
                       Step 2:
                     </span>{" "}
-                    Set your listing price in CELO.
+                    Set your listing price in USDm.
                   </p>
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">
-                    Price (CELO)
+                    Price (USDm)
                   </label>
                   <input
                     type="number"

@@ -3,6 +3,7 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract NFTMarketplace is ReentrancyGuard {
     struct Listing {
@@ -11,6 +12,7 @@ contract NFTMarketplace is ReentrancyGuard {
     }
 
     IERC721 public immutable nftContract;
+    IERC20 public immutable usdmToken;
 
     mapping(uint256 => Listing) public listings;
     uint256[] private _activeTokenIds;
@@ -21,9 +23,11 @@ contract NFTMarketplace is ReentrancyGuard {
     event NFTDelisted(uint256 indexed tokenId, address indexed seller);
     event NFTSold(uint256 indexed tokenId, address indexed seller, address indexed buyer, uint256 price);
 
-    constructor(address _nftContract) {
+    constructor(address _nftContract, address _usdmToken) {
         require(_nftContract != address(0), "Invalid NFT address");
+        require(_usdmToken != address(0), "Invalid USDm address");
         nftContract = IERC721(_nftContract);
+        usdmToken = IERC20(_usdmToken);
     }
 
     /** @notice Contract update 38-5 */
@@ -53,20 +57,25 @@ contract NFTMarketplace is ReentrancyGuard {
         emit NFTDelisted(tokenId, msg.sender);
     }
 
-    function buyNFT(uint256 tokenId) external payable nonReentrant {
+    function buyNFT(uint256 tokenId) external nonReentrant {
         require(_isActive[tokenId], "Not listed");
         Listing memory listing = listings[tokenId];
-        require(msg.value == listing.price, "Incorrect price");
         require(listing.seller != msg.sender, "Cannot buy own NFT");
+        require(
+            usdmToken.allowance(msg.sender, address(this)) >= listing.price,
+            "Insufficient USDm allowance"
+        );
 
         _removeListing(tokenId);
 
+        require(
+            usdmToken.transferFrom(msg.sender, listing.seller, listing.price),
+            "USDm payment failed"
+        );
+
         nftContract.safeTransferFrom(listing.seller, msg.sender, tokenId);
 
-        (bool success, ) = payable(listing.seller).call{value: msg.value}("");
-        require(success, "Payment failed");
-
-        emit NFTSold(tokenId, listing.seller, msg.sender, msg.value);
+        emit NFTSold(tokenId, listing.seller, msg.sender, listing.price);
     }
 
     function _removeListing(uint256 tokenId) private {

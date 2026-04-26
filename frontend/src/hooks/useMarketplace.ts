@@ -4,9 +4,10 @@ import {
   useWriteContract,
   useWaitForTransactionReceipt,
   useReadContract,
+  useAccount,
 } from "wagmi";
-import { marketplaceAbi } from "@/lib/abis";
-import { MARKETPLACE_ADDRESS } from "@/lib/config";
+import { erc20Abi, marketplaceAbi } from "@/lib/abis";
+import { MARKETPLACE_ADDRESS, USDM_ADDRESS } from "@/lib/config";
 
 /** Hook update 42-2 */
 export function useListNFT() {
@@ -42,20 +43,72 @@ export function useCancelListing() {
 }
 
 export function useBuyNFT() {
-  const { writeContract, data: hash, isPending, error, reset } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
+  const { address } = useAccount();
+  const {
+    writeContract: writeBuy,
+    data: buyHash,
+    isPending: isBuyPending,
+    error: buyError,
+    reset: resetBuy,
+  } = useWriteContract();
+  const {
+    writeContract: writeApprove,
+    data: approveHash,
+    isPending: isApprovePending,
+    error: approveError,
+    reset: resetApprove,
+  } = useWriteContract();
+
+  const { isLoading: isBuyConfirming, isSuccess: isBuySuccess } = useWaitForTransactionReceipt({ hash: buyHash });
+  const { isLoading: isApproveConfirming, isSuccess: isApproveSuccess } = useWaitForTransactionReceipt({ hash: approveHash });
+
+  const { data: allowance, refetch: refetchAllowance } = useReadContract({
+    address: USDM_ADDRESS,
+    abi: erc20Abi,
+    functionName: "allowance",
+    args: address ? [address, MARKETPLACE_ADDRESS] : undefined,
+    query: { enabled: !!address },
+  });
 
   const buy = (tokenId: bigint, price: bigint) => {
-    writeContract({
+    writeBuy({
       address: MARKETPLACE_ADDRESS,
       abi: marketplaceAbi,
       functionName: "buyNFT",
       args: [tokenId],
-      value: price,
     });
   };
 
-  return { buy, hash, isPending, isConfirming, isSuccess, error, reset };
+  const approve = (amount: bigint) => {
+    writeApprove({
+      address: USDM_ADDRESS,
+      abi: erc20Abi,
+      functionName: "approve",
+      args: [MARKETPLACE_ADDRESS, amount],
+    });
+  };
+
+  return {
+    buy,
+    approve,
+    allowance,
+    refetchAllowance,
+    buyHash,
+    approveHash,
+    isBuyPending,
+    isApprovePending,
+    isBuyConfirming,
+    isApproveConfirming,
+    isBuySuccess,
+    isApproveSuccess,
+    buyError,
+    approveError,
+    error: buyError || approveError,
+    reset: () => {
+      resetBuy();
+      resetApprove();
+    },
+  };
 }
 
 export function useGetListing(tokenId: bigint | undefined) {

@@ -44,11 +44,19 @@ export default function NFTDetailPage() {
 
   const {
     buy,
-    hash: buyHash,
-    isPending: buyPending,
-    isConfirming: buyConfirming,
-    isSuccess: buySuccess,
-    error: buyError,
+    approve,
+    allowance,
+    refetchAllowance,
+    buyHash,
+    approveHash,
+    isBuyPending: buyPending,
+    isApprovePending: approvePending,
+    isBuyConfirming: buyConfirming,
+    isApproveConfirming: approveConfirming,
+    isBuySuccess: buySuccess,
+    isApproveSuccess: approveSuccess,
+    buyError,
+    approveError,
     reset: buyReset,
   } = useBuyNFT();
 
@@ -75,6 +83,7 @@ export default function NFTDetailPage() {
     address &&
     (listing[0] as string).toLowerCase() === address.toLowerCase();
   const listingPrice = listing?.[1] ?? 0n;
+  const needsApproval = !allowance || allowance < listingPrice;
 
   return (
     <>
@@ -127,7 +136,7 @@ export default function NFTDetailPage() {
                 <div className="flex justify-between">
                   <span className="text-gray-400">Listed Price</span>
                   <span className="text-green-400 font-bold">
-                    {formatEther(listingPrice)} CELO
+                    {formatEther(listingPrice)} USDm
                   </span>
                 </div>
               )}
@@ -136,15 +145,27 @@ export default function NFTDetailPage() {
             <div className="space-y-3">
               {isListed && !isSeller && address && (
                 <button
-                  onClick={() => buy(tokenId, listingPrice)}
-                  disabled={buyPending || buyConfirming}
+                  onClick={() => {
+                    if (needsApproval) {
+                      approve(listingPrice);
+                      return;
+                    }
+                    buy(tokenId, listingPrice);
+                  }}
+                  disabled={buyPending || approvePending || buyConfirming || approveConfirming}
                   className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
                 >
-                  {buyPending
+                  {needsApproval
+                    ? approvePending
+                      ? "Confirm approval..."
+                      : approveConfirming
+                        ? "Approving USDm..."
+                        : `Approve ${formatEther(listingPrice)} USDm`
+                    : buyPending
                     ? "Confirm in wallet..."
                     : buyConfirming
                       ? "Processing..."
-                      : `Buy for ${formatEther(listingPrice)} CELO`}
+                      : `Buy for ${formatEther(listingPrice)} USDm`}
                 </button>
               )}
 
@@ -185,13 +206,34 @@ export default function NFTDetailPage() {
             type="success"
             message="NFT purchased successfully!"
             txHash={buyHash}
-            onClose={buyReset}
+            onClose={() => {
+              buyReset();
+              refetchAllowance();
+            }}
+          />
+        )}
+        {approveSuccess && approveHash && (
+          <Notification
+            type="success"
+            message="USDm approved. You can complete the purchase now."
+            txHash={approveHash}
+            onClose={() => {
+              buyReset();
+              refetchAllowance();
+            }}
           />
         )}
         {buyError && (
           <Notification
             type="error"
             message={(buyError as Error).message.slice(0, 120)}
+            onClose={buyReset}
+          />
+        )}
+        {approveError && (
+          <Notification
+            type="error"
+            message={(approveError as Error).message.slice(0, 120)}
             onClose={buyReset}
           />
         )}

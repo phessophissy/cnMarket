@@ -18,6 +18,9 @@ export const SOCIAL_LINKS = {
 } as const;
 
 export const MINIPAY_DEEP_LINK = "https://minipay.opera.com";
+
+export type SupportedWallet = "MiniPay" | "MetaMask";
+
 export const MINIPAY_ANDROID_URL = "https://play.google.com/store/apps/details?id=com.opera.minipay";
 export const MINIPAY_IOS_URL = "https://apps.apple.com/app/minipay/id6504087257";
 export const MINIPAY_SUPPORTED_CHAINS = [42220] as const;

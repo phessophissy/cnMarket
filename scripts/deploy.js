@@ -14,10 +14,15 @@ async function main() {
   const legendaryURI =
     process.env.LEGENDARY_URI || "ipfs://QmLegendaryHash/metadata.json";
 
+  const usdmTokenAddress = process.env.USDM_TOKEN_ADDRESS;
+  if (!usdmTokenAddress) {
+    throw new Error("USDM_TOKEN_ADDRESS env var is required");
+  }
+
   // Deploy NFT contract
   console.log("\nDeploying CeloNFT...");
   const CeloNFT = await hre.ethers.getContractFactory("CeloNFT");
-  const nft = await CeloNFT.deploy(commonURI, rareURI, legendaryURI);
+  const nft = await CeloNFT.deploy(commonURI, rareURI, legendaryURI, usdmTokenAddress);
   await nft.waitForDeployment();
   const nftAddress = await nft.getAddress();
   console.log("CeloNFT deployed to:", nftAddress);
@@ -25,7 +30,7 @@ async function main() {
   // Deploy Marketplace contract
   console.log("\nDeploying NFTMarketplace...");
   const Marketplace = await hre.ethers.getContractFactory("NFTMarketplace");
-  const marketplace = await Marketplace.deploy(nftAddress);
+  const marketplace = await Marketplace.deploy(nftAddress, usdmTokenAddress);
   await marketplace.waitForDeployment();
   const marketplaceAddress = await marketplace.getAddress();
   console.log("NFTMarketplace deployed to:", marketplaceAddress);
@@ -39,6 +44,7 @@ async function main() {
   console.log("\nAdd to frontend/.env.local:");
   console.log(`NEXT_PUBLIC_NFT_ADDRESS=${nftAddress}`);
   console.log(`NEXT_PUBLIC_MARKETPLACE_ADDRESS=${marketplaceAddress}`);
+  console.log(`NEXT_PUBLIC_USDM_ADDRESS=${usdmTokenAddress}`);
 }
 
 main().catch((error) => {

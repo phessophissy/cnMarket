@@ -1,4 +1,7 @@
 import { ZERO_ADDRESS } from "./constants";
+export const USDM_ADDRESS = (process.env.NEXT_PUBLIC_USDM_ADDRESS ||
+  "0x0000000000000000000000000000000000000000") as `0x${string}`;
+
 export const NFT_ADDRESS = (process.env.NEXT_PUBLIC_NFT_ADDRESS ||
   "0x0000000000000000000000000000000000000000") as `0x${string}`;
 
@@ -30,13 +33,13 @@ export const RARITY_COLORS = {
 } as const;
 
 export const MINT_PRICES: Record<0 | 1 | 2, bigint> = {
-  0: BigInt("10000000000000000"), // 0.01 CELO
-  1: BigInt("30000000000000000"), // 0.03 CELO
-  2: BigInt("50000000000000000"), // 0.05 CELO
+  0: BigInt("10000000000000000"), // 0.01 USDm
+  1: BigInt("30000000000000000"), // 0.03 USDm
+  2: BigInt("50000000000000000"), // 0.05 USDm
 };
 
 export const MINT_PRICE_DISPLAY: Record<0 | 1 | 2, string> = {
-  0: "0.01",
-  1: "0.03",
-  2: "0.05",
+  0: "0.01 USDm",
+  1: "0.03 USDm",
+  2: "0.05 USDm",
 };

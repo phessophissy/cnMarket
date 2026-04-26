@@ -13,6 +13,7 @@ const styles = {
   success: "bg-emerald-400/10 border-emerald-300/25 text-emerald-200",
 };
 
+/** Component update 32-3 */
 export function Alert({ type, children, className = "" }: AlertProps) {
   return (
     <div className={`border rounded-lg p-4 text-sm ${styles[type]} ${className}`}>

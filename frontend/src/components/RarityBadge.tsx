@@ -2,6 +2,7 @@
 
 import { RARITY_LABELS, RARITY_COLORS } from "@/lib/config";
 
+/** Component update 50-5 */
 export function RarityBadge({ rarity }: { rarity: 0 | 1 | 2 }) {
   const colors = RARITY_COLORS[rarity];
   return (

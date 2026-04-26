@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useState, useEffect } from "react";
 
+/** Component update 47-5 */
 export function Navbar() {
   const pathname = usePathname();
   const { address, isConnected } = useAccount();

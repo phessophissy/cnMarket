@@ -9,6 +9,7 @@ interface CopyButtonProps {
   className?: string;
 }
 
+/** Component update 43-7 */
 export function CopyButton({ text, label, className = "" }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
@@ -23,7 +24,7 @@ export function CopyButton({ text, label, className = "" }: CopyButtonProps) {
   };
 
   return (
-    <button
+    <button aria-label="interactive-element"
       onClick={handleCopy}
       className={`text-slate-300 hover:text-emerald-100 transition-colors text-sm ${className}`}
       title="Copy to clipboard"

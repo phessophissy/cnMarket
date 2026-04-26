@@ -9,6 +9,7 @@ interface BreadcrumbProps {
   items: BreadcrumbItem[];
 }
 
+/** Component update 4-1 */
 export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6">

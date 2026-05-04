@@ -1,78 +1,99 @@
 "use client";
 
 import Link from "next/link";
+import { Logo } from "./Logo";
 
 /** Component update 45-9 */
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-emerald-200/15 bg-[#081d25]/65 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3
-              className="text-white font-bold text-xl mb-3 tracking-tight"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              cnMarket
-            </h3>
-            <p className="text-slate-300 text-sm leading-6">
-              Mint and trade NFTs with 3 rarity levels on the Celo blockchain.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-white font-semibold mb-3">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-slate-300 hover:text-emerald-100 text-sm transition-colors">
-                  Marketplace
-                </Link>
-              </li>
-              <li>
-                <Link href="/mint" className="text-slate-300 hover:text-emerald-100 text-sm transition-colors">
-                  Mint NFT
-                </Link>
-              </li>
-              <li>
-                <Link href="/my-nfts" className="text-slate-300 hover:text-emerald-100 text-sm transition-colors">
-                  My Collection
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-semibold mb-3">Resources</h4>
-            <ul className="space-y-2">
-              <li>
+    <footer className="mt-20 px-3 pb-4 sm:px-4 md:px-6">
+      <div className="mx-auto max-w-7xl">
+        <div className="section-shell glass-surface rounded-[2rem] border border-emerald-100/10 px-6 py-8 sm:px-8 sm:py-10">
+          <div className="grid gap-10 lg:grid-cols-[1.35fr_0.85fr_0.85fr]">
+            <div className="space-y-5">
+              <Logo size="lg" />
+              <p className="max-w-md text-sm leading-7 text-slate-300 sm:text-base">
+                Mint, collect, and trade rarity-based NFTs with a calmer on-chain
+                experience built for MiniPay, mobile wallets, and fast Celo settlement.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span className="rounded-full border border-emerald-100/12 bg-emerald-200/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-100">
+                  3 Rarity Tiers
+                </span>
+                <span className="rounded-full border border-cyan-100/12 bg-cyan-200/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-100">
+                  USDm Pricing
+                </span>
+                <span className="rounded-full border border-amber-100/12 bg-amber-200/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-amber-100">
+                  Mobile Ready
+                </span>
+              </div>
+            </div>
+            <div>
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">
+                Explore
+              </h4>
+              <ul className="space-y-3 text-sm text-slate-200">
+                <li>
+                  <Link href="/" className="transition hover:text-emerald-100">
+                    Marketplace
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/mint" className="transition hover:text-emerald-100">
+                    Mint NFT
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/my-nfts" className="transition hover:text-emerald-100">
+                    My Collection
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="transition hover:text-emerald-100">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/faq" className="transition hover:text-emerald-100">
+                    FAQ
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">
+                Ecosystem
+              </h4>
+              <div className="space-y-3">
                 <a
                   href="https://github.com/phessophissy/cnMarket"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-300 hover:text-emerald-100 text-sm transition-colors"
+                  className="feature-card block rounded-3xl p-4 transition hover:-translate-y-1"
                 >
-                  GitHub
+                  <p className="text-sm font-semibold text-white">Open-source codebase</p>
+                  <p className="mt-1 text-sm text-slate-300">Review contracts, frontend, and MiniPay support on GitHub.</p>
                 </a>
-              </li>
-              <li>
                 <a
                   href="https://celoscan.io"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-300 hover:text-emerald-100 text-sm transition-colors"
+                  className="feature-card block rounded-3xl p-4 transition hover:-translate-y-1"
                 >
-                  CeloScan
+                  <p className="text-sm font-semibold text-white">Chain visibility</p>
+                  <p className="mt-1 text-sm text-slate-300">Track transactions and verify on-chain activity on CeloScan.</p>
                 </a>
-              </li>
-            </ul>
-            <div className="mt-4 inline-flex items-center gap-2 text-xs text-emerald-100 bg-emerald-200/10 border border-emerald-100/20 px-3 py-1.5 rounded-full">
-              <span className="h-2 w-2 rounded-full bg-emerald-300 animate-pulse-dot" />
-              Celo Mainnet Live
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-100/14 bg-emerald-200/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100">
+                <span className="h-2.5 w-2.5 rounded-full bg-[linear-gradient(180deg,var(--mint-0),var(--mint-2))] animate-pulse-dot" />
+                Celo Mainnet Live
+              </div>
             </div>
           </div>
-        </div>
-        <div className="border-t border-emerald-200/10 mt-8 pt-6 text-center">
-          <p className="text-slate-400 text-sm">
-            © {new Date().getFullYear()} cnMarket. Built on Celo.
-          </p>
+          <div className="mt-8 border-t border-emerald-100/10 pt-6 text-sm text-slate-400 sm:flex sm:items-center sm:justify-between">
+            <p>© {new Date().getFullYear()} cnMarket. Crafted for collectible-first trading on Celo.</p>
+            <p className="mt-2 sm:mt-0">Fast UX, clear pricing, modern wallet support.</p>
+          </div>
         </div>
       </div>
     </footer>

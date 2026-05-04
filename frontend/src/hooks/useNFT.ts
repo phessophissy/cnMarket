@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   useWriteContract,
   useWaitForTransactionReceipt,
@@ -13,6 +13,7 @@ import { NFT_ADDRESS, MARKETPLACE_ADDRESS, MINT_PRICES, USDM_ADDRESS } from "@/l
 /** Hook update 40-7 */
 export function useMintNFT(rarity: 0 | 1 | 2) {
   const { address } = useAccount();
+  const [locallyApprovedAmount, setLocallyApprovedAmount] = useState<bigint>(0n);
   const { writeContract: writeMint, data: mintHash, isPending: isMintPending, error: mintError, reset: resetMint } = useWriteContract();
   const { writeContract: writeApprove, data: approveHash, isPending: isApprovePending, error: approveError, reset: resetApprove } = useWriteContract();
 
@@ -28,13 +29,23 @@ export function useMintNFT(rarity: 0 | 1 | 2) {
   });
 
   const price = MINT_PRICES[rarity];
-  const needsApproval = allowance === undefined || allowance < price;
+  const hasAllowance = allowance !== undefined && allowance >= price;
+  const hasLocalApproval = locallyApprovedAmount >= price;
+  const needsApproval = !(hasAllowance || hasLocalApproval);
 
   useEffect(() => {
     if (isApproveSuccess) {
+      setLocallyApprovedAmount(price);
       refetchAllowance();
     }
-  }, [isApproveSuccess, refetchAllowance]);
+  }, [isApproveSuccess, price, refetchAllowance]);
+
+  useEffect(() => {
+    if (isMintSuccess) {
+      setLocallyApprovedAmount(0n);
+      refetchAllowance();
+    }
+  }, [isMintSuccess, refetchAllowance]);
 
   const approve = () => {
     writeApprove({
@@ -55,6 +66,7 @@ export function useMintNFT(rarity: 0 | 1 | 2) {
   };
 
   const reset = () => {
+    setLocallyApprovedAmount(0n);
     resetMint();
     resetApprove();
   };

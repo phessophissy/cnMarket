@@ -7,7 +7,7 @@ const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID || "";
 export const config = createConfig({
   chains: [celo],
   connectors: [
-    injected({ target: "metaMask" }),
+    injected(),
     ...(projectId ? [walletConnect({ projectId })] : []),
   ],
   transports: {

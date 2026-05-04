@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useConnect, useAccount } from "wagmi";
+import { getInjectedConnector } from "@/lib/connectors";
 
 export interface MiniPayState {
   isMiniPay: boolean;
@@ -23,7 +24,7 @@ export function useMiniPay(): MiniPayState {
       try {
         if (typeof window !== "undefined" && window.ethereum?.isMiniPay) {
           setIsMiniPay(true);
-          const connector = connectors.find((c) => c.id === "injected");
+          const connector = getInjectedConnector(connectors);
           if (connector) connect({ connector });
         }
       } finally {
@@ -34,7 +35,7 @@ export function useMiniPay(): MiniPayState {
   }, [connect, connectors]);
 
   const manualConnect = useCallback(() => {
-    const connector = connectors.find((c) => c.id === "injected");
+    const connector = getInjectedConnector(connectors);
     if (connector) connect({ connector });
   }, [connect, connectors]);
 

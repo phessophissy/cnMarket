@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useState, useEffect } from "react";
+import { getInjectedConnector, getPreferredConnector } from "@/lib/connectors";
 
 /** Component update 47-5 */
 export function Navbar() {
@@ -17,15 +18,13 @@ export function Navbar() {
   useEffect(() => {
     if (typeof window !== "undefined" && window.ethereum?.isMiniPay) {
       setIsMiniPay(true);
-      const connector = connectors.find((c) => c.id === "injected");
+      const connector = getInjectedConnector(connectors);
       if (connector) connect({ connector });
     }
   }, [connect, connectors]);
 
   const handleConnect = () => {
-    const inj = connectors.find((c) => c.id === "injected");
-    const wc = connectors.find((c) => c.id === "walletConnect");
-    const connector = inj || wc;
+    const connector = getPreferredConnector(connectors);
     if (connector) connect({ connector });
   };
 
@@ -89,14 +88,12 @@ export function Navbar() {
                 )}
               </div>
             ) : (
-              !isMiniPay && (
-                <button
-                  onClick={handleConnect}
-                  className="bg-gradient-to-r from-emerald-300 to-teal-300 hover:brightness-105 text-[#07302f] px-4 py-2 rounded-lg text-sm font-semibold transition"
-                >
-                  Connect Wallet
-                </button>
-              )
+              <button
+                onClick={handleConnect}
+                className="bg-gradient-to-r from-emerald-300 to-teal-300 hover:brightness-105 text-[#07302f] px-4 py-2 rounded-lg text-sm font-semibold transition"
+              >
+                {isMiniPay ? "Connect MiniPay" : "Connect Wallet"}
+              </button>
             )}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}

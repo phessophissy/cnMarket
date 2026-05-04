@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     title: "cnMarket — NFT Marketplace on Celo",
     description: "Mint and trade NFTs with 3 rarity levels on Celo blockchain.",
   },
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: ["/icon.svg"],
+    apple: ["/icon.svg"],
+  },
   other: {
     "talentapp:project_verification":
       "1e71d5edf0a173bc0c8e088eed0429480af9919177e00e6a37d8d84e46a1f9f9796df14d5e506ff40dd26794e9709f437b41e91e80dd2a2171d788f9c8976a68",

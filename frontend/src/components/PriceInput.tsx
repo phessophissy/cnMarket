@@ -27,7 +27,7 @@ export function PriceInput({
         className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 pr-16 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:opacity-50"
       />
       <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium text-sm">
-        CELO
+        USDm
       </span>
     </div>
   );

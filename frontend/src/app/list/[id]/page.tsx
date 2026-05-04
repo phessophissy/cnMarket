@@ -86,15 +86,15 @@ export default function ListNFTPage() {
     return (
       <>
         <Navbar />
-        <main className="max-w-4xl mx-auto px-4 py-8">
-          <div className="text-center py-20 bg-gray-900 rounded-xl border border-red-800">
-            <p className="text-5xl mb-4">⛔</p>
-            <p className="text-red-400 font-medium">
+        <main className="mx-auto max-w-4xl px-4 py-8 md:py-10">
+          <div className="section-shell glass-surface rounded-[2rem] border border-rose-200/16 px-6 py-20 text-center">
+            <p className="mb-4 text-5xl">⛔</p>
+            <p className="text-2xl font-semibold text-rose-100" style={{ fontFamily: "var(--font-heading)" }}>
               You don&apos;t own this NFT
             </p>
             <Link
               href="/my-nfts"
-              className="text-gray-400 hover:text-white mt-4 inline-block text-sm"
+              className="mt-5 inline-flex rounded-full border border-rose-200/16 bg-rose-400/10 px-4 py-2 text-sm text-rose-100 transition hover:bg-rose-400/16"
             >
               ← Back to My NFTs
             </Link>
@@ -107,38 +107,52 @@ export default function ListNFTPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-2xl mx-auto px-4 py-8">
+      <main className="mx-auto max-w-5xl px-4 py-8 md:py-10">
         <Link
           href="/my-nfts"
-          className="text-gray-400 hover:text-white text-sm mb-6 inline-block"
+          className="mb-6 inline-flex rounded-full border border-emerald-100/10 bg-white/5 px-4 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white"
         >
           ← Back to My NFTs
         </Link>
 
-        <h1 className="text-3xl font-bold mb-6">List NFT for Sale</h1>
+        <div className="mb-8 section-shell glass-surface rounded-[2rem] px-6 py-8 md:px-8">
+          <span className="eyebrow">Listing Flow</span>
+          <h1 className="mt-4 text-5xl font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+            List NFT for Sale
+          </h1>
+          <p className="mt-4 max-w-2xl text-sm leading-8 text-slate-300 md:text-base">
+            Prepare the asset for market, approve transfer rights once, then set a USDm price that feels right for your rarity tier.
+          </p>
+        </div>
 
-        <div className="bg-gray-800 rounded-xl overflow-hidden border border-gray-700">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="feature-card overflow-hidden rounded-[1.8rem]">
           <div
-            className={`h-48 bg-gradient-to-br ${colors.gradient} flex items-center justify-center`}
+            className={`flex h-64 items-center justify-center bg-gradient-to-br ${colors.gradient}`}
           >
-            <span className="text-6xl font-bold text-white/20">
+            <span className="text-7xl font-bold text-white/20">
               #{tokenId.toString()}
             </span>
           </div>
 
-          <div className="p-6 space-y-6">
+            <div className="space-y-6 p-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-2xl font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
                 CNFT #{tokenId.toString()}
               </h2>
               <RarityBadge rarity={rarityNum} />
             </div>
+            <div className="rounded-[1.4rem] border border-emerald-100/10 bg-white/5 p-4">
+              <p className="text-sm leading-7 text-slate-300">
+                Listing keeps custody logic on-chain while letting buyers discover this NFT directly from the marketplace feed.
+              </p>
+            </div>
 
             {!isApproved ? (
               <div className="space-y-4">
-                <div className="bg-gray-900 rounded-lg p-4 border border-gray-700">
-                  <p className="text-gray-300 text-sm">
-                    <span className="text-yellow-400 font-medium">
+                <div className="rounded-[1.4rem] border border-amber-100/14 bg-amber-200/10 p-4">
+                  <p className="text-sm leading-7 text-slate-200">
+                    <span className="font-medium text-amber-100">
                       Step 1:
                     </span>{" "}
                     Approve the marketplace contract to transfer this NFT on
@@ -148,7 +162,7 @@ export default function ListNFTPage() {
                 <button
                   onClick={() => approve(tokenId)}
                   disabled={approvePending || approveConfirming}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
+                  className="button-shine w-full rounded-full bg-gradient-to-r from-cyan-300 to-emerald-300 py-3.5 font-semibold text-[#063433] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {approvePending
                     ? "Confirm in wallet..."
@@ -159,16 +173,16 @@ export default function ListNFTPage() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="bg-gray-900 rounded-lg p-4 border border-gray-700">
-                  <p className="text-gray-300 text-sm">
-                    <span className="text-green-400 font-medium">
+                <div className="rounded-[1.4rem] border border-emerald-100/14 bg-emerald-200/10 p-4">
+                  <p className="text-sm leading-7 text-slate-200">
+                    <span className="font-medium text-emerald-100">
                       Step 2:
                     </span>{" "}
                     Set your listing price in USDm.
                   </p>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-2">
+                  <label className="mb-2 block text-sm text-slate-400">
                     Price (USDm)
                   </label>
                   <input
@@ -178,7 +192,7 @@ export default function ListNFTPage() {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     placeholder="0.05"
-                    className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+                    className="w-full rounded-[1.2rem] border border-emerald-100/10 bg-white/5 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-emerald-100/24 focus:ring-2 focus:ring-emerald-300/20"
                   />
                 </div>
                 <button
@@ -193,7 +207,7 @@ export default function ListNFTPage() {
                     !price ||
                     parseFloat(price) <= 0
                   }
-                  className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
+                  className="button-shine w-full rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 py-3.5 font-semibold text-[#062f2e] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {listPending
                     ? "Confirm in wallet..."
@@ -203,6 +217,25 @@ export default function ListNFTPage() {
                 </button>
               </div>
             )}
+            </div>
+          </div>
+
+          <aside className="feature-card rounded-[1.8rem] p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Seller Notes</p>
+            <div className="mt-5 space-y-4">
+              {[
+                "Approval only grants the marketplace permission to move this NFT during a sale.",
+                "Pricing is entered in USDm for more stable collector-facing value.",
+                "After listing, your NFT will become visible on the live marketplace feed.",
+              ].map((item, index) => (
+                <div key={item} className="rounded-[1.4rem] border border-emerald-100/10 bg-white/5 p-4">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-slate-400">
+                    Tip {index + 1}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-slate-300">{item}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

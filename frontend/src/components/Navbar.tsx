@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useState, useEffect } from "react";
 import { getInjectedConnector, getPreferredConnector } from "@/lib/connectors";
+import { Logo } from "./Logo";
+import Link from "next/link";
 
 /** Component update 47-5 */
 export function Navbar() {
@@ -39,95 +40,100 @@ export function Navbar() {
   return (
     <nav
       aria-label="Main navigation"
-      className="sticky top-0 z-40 border-b border-emerald-300/15 bg-[#081d25]/80 backdrop-blur-xl"
+      className="sticky top-0 z-40 px-3 pt-3 sm:px-4 md:px-6"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-8">
-            <Link
-              href="/"
-              className="text-white font-bold text-xl tracking-tight"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              cnMarket
-            </Link>
-            {isMiniPay && (
-              <span className="hidden sm:inline text-xs bg-amber-300/20 text-amber-100 px-2 py-0.5 rounded-full border border-amber-200/20">
-                MiniPay
-              </span>
-            )}
-            <div className="hidden md:flex space-x-1">
+      <div className="mx-auto max-w-7xl">
+        <div className="section-shell glass-surface border border-emerald-100/10 px-4 py-3 sm:px-5">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4 lg:gap-8">
+              <Logo />
+              <div className="hidden xl:flex items-center gap-3 rounded-full border border-white/6 bg-white/5 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-slate-300">
+                <span className="h-2 w-2 rounded-full bg-[linear-gradient(180deg,var(--mint-0),var(--mint-2))] animate-pulse-dot" />
+                Live on Celo
+              </div>
+              <div className="hidden md:flex items-center gap-1 rounded-full border border-emerald-100/10 bg-[#071a20]/70 p-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+                      pathname === link.href
+                        ? "bg-gradient-to-r from-emerald-300 to-teal-300 text-[#062f2d] shadow-[0_8px_20px_rgba(103,240,191,0.18)]"
+                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              {isMiniPay && (
+                <span className="hidden sm:inline-flex rounded-full border border-amber-200/20 bg-amber-200/10 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-amber-100">
+                  MiniPay
+                </span>
+              )}
+              {isConnected ? (
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className="hidden md:inline-flex rounded-full border border-emerald-100/14 bg-emerald-200/10 px-4 py-2 text-sm font-mono text-emerald-50">
+                    {address?.slice(0, 6)}...{address?.slice(-4)}
+                  </span>
+                  {!isMiniPay && (
+                    <button
+                      onClick={() => disconnect()}
+                      className="rounded-full border border-rose-200/18 bg-rose-400/12 px-4 py-2 text-sm font-semibold text-rose-100 transition hover:bg-rose-400/18"
+                    >
+                      Disconnect
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={handleConnect}
+                  className="button-shine rounded-full bg-gradient-to-r from-emerald-300 via-mint-200 to-teal-300 px-4 py-2.5 text-sm font-semibold text-[#07302f] transition hover:brightness-105 sm:px-5"
+                >
+                  {isMiniPay ? "Connect MiniPay" : "Connect Wallet"}
+                </button>
+              )}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="md:hidden rounded-full border border-emerald-100/12 bg-white/5 p-3 text-slate-200 transition hover:bg-white/10"
+                aria-label="Toggle mobile menu"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={mobileOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          {mobileOpen && (
+            <div className="mt-4 animate-fade-in rounded-[1.6rem] border border-emerald-100/10 bg-[#071a20]/78 p-3 md:hidden">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`mb-1 block rounded-2xl px-4 py-3 text-sm font-semibold transition-all last:mb-0 ${
                     pathname === link.href
-                      ? "text-emerald-100 bg-emerald-200/15 border border-emerald-200/25"
-                      : "text-slate-300 hover:text-emerald-50 hover:bg-emerald-200/10"
+                      ? "bg-gradient-to-r from-emerald-300 to-teal-300 text-[#062f2d]"
+                      : "text-slate-200 hover:bg-white/6"
                   }`}
+                  onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            {isConnected ? (
-              <div className="flex items-center gap-3">
-                <span className="hidden sm:inline text-emerald-50 text-sm bg-emerald-200/10 border border-emerald-100/20 px-3 py-1.5 rounded-lg font-mono">
-                  {address?.slice(0, 6)}...{address?.slice(-4)}
-                </span>
-                {!isMiniPay && (
-                  <button
-                    onClick={() => disconnect()}
-                    className="bg-rose-400/20 border border-rose-200/20 hover:bg-rose-400/30 text-rose-100 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                  >
-                    Disconnect
-                  </button>
-                )}
+              <div className="mt-3 flex items-center justify-between rounded-2xl border border-emerald-100/10 bg-white/5 px-4 py-3 text-xs uppercase tracking-[0.18em] text-slate-400">
+                <span>Chain</span>
+                <span className="text-emerald-100">Celo Mainnet</span>
               </div>
-            ) : (
-              <button
-                onClick={handleConnect}
-                className="bg-gradient-to-r from-emerald-300 to-teal-300 hover:brightness-105 text-[#07302f] px-4 py-2 rounded-lg text-sm font-semibold transition"
-              >
-                {isMiniPay ? "Connect MiniPay" : "Connect Wallet"}
-              </button>
-            )}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-slate-300 hover:text-emerald-100 p-2"
-              aria-label="Toggle mobile menu"
-            >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d={mobileOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-              </svg>
-            </button>
-          </div>
+            </div>
+          )}
         </div>
-        {mobileOpen && (
-          <div className="md:hidden py-2 space-y-1 pb-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`block px-3 py-2 rounded-lg text-sm ${
-                  pathname === link.href
-                    ? "text-emerald-50 bg-emerald-200/15"
-                    : "text-slate-300 hover:text-emerald-50 hover:bg-emerald-200/10"
-                }`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        )}
       </div>
     </nav>
   );

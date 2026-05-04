@@ -88,61 +88,82 @@ export default function NFTDetailPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className="mx-auto max-w-6xl px-4 py-8 md:py-10">
         <Link
           href="/"
-          className="text-gray-400 hover:text-white text-sm mb-6 inline-block"
+          className="mb-6 inline-flex rounded-full border border-emerald-100/10 bg-white/5 px-4 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white"
         >
           ← Back to Marketplace
         </Link>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_0.92fr]">
           <div
-            className={`h-72 md:h-96 rounded-xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center`}
+            className={`section-shell glass-surface relative flex h-[22rem] items-center justify-center overflow-hidden rounded-[2rem] bg-gradient-to-br ${colors.gradient} md:h-[34rem]`}
           >
-            <span className="text-8xl font-bold text-white/20">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_28%),linear-gradient(to_bottom,transparent,rgba(2,8,10,0.36))]" />
+            <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-black/10 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/90">
+              Rarity Showcase
+            </div>
+            <span className="absolute -bottom-10 -right-2 text-[10rem] font-semibold text-white/10">
+              0{rarityNum + 1}
+            </span>
+            <span className="relative text-8xl font-bold text-white/22 md:text-[9rem]">
               #{tokenId.toString()}
             </span>
           </div>
 
           <div className="space-y-6">
-            <div>
-              <h1 className="text-3xl font-bold">
+            <div className="section-shell glass-surface rounded-[2rem] p-6 md:p-7">
+              <span className="eyebrow">Asset Detail</span>
+              <h1 className="mt-5 text-4xl font-semibold text-white md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
                 CNFT #{tokenId.toString()}
               </h1>
-              <div className="mt-2">
+              <div className="mt-4">
                 <RarityBadge rarity={rarityNum} />
               </div>
+              <p className="mt-5 text-sm leading-8 text-slate-300 md:text-base">
+                Inspect ownership, listing status, and purchase controls for this collectible before you take action on-chain.
+              </p>
             </div>
 
-            <div className="bg-gray-800 rounded-lg p-4 space-y-3">
-              <div className="flex justify-between">
-                <span className="text-gray-400">Owner</span>
-                <span className="text-white font-mono text-sm">
+            <div className="feature-card rounded-[1.8rem] p-5">
+              <div className="grid gap-3">
+                <div className="flex justify-between gap-4 rounded-2xl border border-emerald-100/10 bg-white/5 px-4 py-3">
+                  <span className="text-sm text-slate-400">Owner</span>
+                  <span className="font-mono text-sm text-white">
                   {ownerStr
                     ? `${ownerStr.slice(0, 6)}...${ownerStr.slice(-4)}`
                     : "..."}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Rarity</span>
-                <span className="text-white">{RARITY_LABELS[rarityNum]}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Token ID</span>
-                <span className="text-white">{tokenId.toString()}</span>
-              </div>
-              {isListed && (
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Listed Price</span>
-                  <span className="text-green-400 font-bold">
-                    {formatEther(listingPrice)} USDm
                   </span>
                 </div>
-              )}
+                <div className="flex justify-between gap-4 rounded-2xl border border-emerald-100/10 bg-white/5 px-4 py-3">
+                  <span className="text-sm text-slate-400">Rarity</span>
+                  <span className="text-sm font-semibold text-white">{RARITY_LABELS[rarityNum]}</span>
+                </div>
+                <div className="flex justify-between gap-4 rounded-2xl border border-emerald-100/10 bg-white/5 px-4 py-3">
+                  <span className="text-sm text-slate-400">Token ID</span>
+                  <span className="text-sm font-semibold text-white">{tokenId.toString()}</span>
+                </div>
+                <div className="flex justify-between gap-4 rounded-2xl border border-emerald-100/10 bg-white/5 px-4 py-3">
+                  <span className="text-sm text-slate-400">Market status</span>
+                  <span className="text-sm font-semibold text-white">{isListed ? "Listed" : "Not listed"}</span>
+                </div>
+                {isListed && (
+                  <div className="rounded-[1.4rem] border border-emerald-100/12 bg-gradient-to-r from-emerald-300/16 to-cyan-300/10 px-4 py-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-slate-300">Listed Price</span>
+                      <span className="text-2xl font-semibold text-emerald-100">
+                        {formatEther(listingPrice)} USDm
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="feature-card rounded-[1.8rem] p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Actions</p>
+              <div className="mt-5 space-y-3">
               {isListed && !isSeller && address && (
                 <button
                   onClick={() => {
@@ -153,7 +174,7 @@ export default function NFTDetailPage() {
                     buy(tokenId, listingPrice);
                   }}
                   disabled={buyPending || approvePending || buyConfirming || approveConfirming}
-                  className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
+                  className="button-shine w-full rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 py-3.5 font-semibold text-[#062f2d] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {needsApproval
                     ? approvePending
@@ -173,7 +194,7 @@ export default function NFTDetailPage() {
                 <button
                   onClick={() => cancel(tokenId)}
                   disabled={cancelPending || cancelConfirming}
-                  className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
+                  className="w-full rounded-full border border-rose-200/18 bg-rose-400/14 py-3.5 font-semibold text-rose-100 transition hover:bg-rose-400/20 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {cancelPending
                     ? "Confirm in wallet..."
@@ -186,17 +207,18 @@ export default function NFTDetailPage() {
               {isOwner && !isListed && (
                 <Link
                   href={`/list/${tokenId.toString()}`}
-                  className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors"
+                  className="block w-full rounded-full border border-cyan-100/16 bg-cyan-300/12 py-3.5 text-center font-semibold text-cyan-100 transition hover:bg-cyan-300/18"
                 >
                   List for Sale
                 </Link>
               )}
 
               {!address && (
-                <p className="text-center text-gray-500 text-sm">
+                <p className="text-center text-sm text-slate-400">
                   Connect wallet to interact
                 </p>
               )}
+            </div>
             </div>
           </div>
         </div>

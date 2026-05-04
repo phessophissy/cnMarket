@@ -38,16 +38,18 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-emerald-100/10">
+    <div className="border-b border-emerald-100/10 last:border-b-0">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left py-4 flex items-center justify-between hover:text-emerald-100 transition-colors"
+        className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-emerald-100"
       >
-        <span className="font-medium">{q}</span>
-        <span className="text-slate-300 text-xl">{open ? "−" : "+"}</span>
+        <span className="pr-4 text-base font-semibold text-white">{q}</span>
+        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-100/12 bg-white/5 text-xl text-slate-300">
+          {open ? "−" : "+"}
+        </span>
       </button>
       {open && (
-        <p className="text-slate-300 pb-4 animate-fade-in leading-7">{a}</p>
+        <p className="animate-fade-in pb-5 text-sm leading-7 text-slate-300 md:text-base">{a}</p>
       )}
     </div>
   );
@@ -57,14 +59,17 @@ export default function FAQPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-3xl mx-auto px-4 py-12">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-semibold mb-4" style={{ fontFamily: "var(--font-heading)" }}>
-            Frequently Asked <span className="text-gradient">Questions</span>
+      <main className="mx-auto max-w-5xl px-4 py-8 md:py-10">
+        <section className="section-shell glass-surface rounded-[2rem] px-6 py-8 md:px-8">
+          <span className="eyebrow">Support Center</span>
+          <h1 className="mt-4 text-5xl font-semibold md:text-6xl" style={{ fontFamily: "var(--font-heading)" }}>
+            Frequently asked <span className="text-gradient">questions</span>
           </h1>
-          <p className="text-slate-200/85">Everything you need to know about cnMarket</p>
-        </div>
-        <div className="glass-surface rounded-3xl border border-emerald-100/10 px-6">
+          <p className="mt-5 max-w-2xl text-base leading-8 text-slate-200/85">
+            A clean reference for pricing, wallet support, network details, and how the core marketplace actions work.
+          </p>
+        </section>
+        <div className="mt-8 feature-card rounded-[2rem] px-6 md:px-8">
           {faqs.map((faq) => (
             <FAQItem key={faq.q} {...faq} />
           ))}

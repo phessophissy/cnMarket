@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "NFT minting and marketplace dApp on Celo",
   "scripts": {
-    "build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build",
-    "vercel-build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build",
+    "build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build && rm -rf .next && cp -R frontend/.next .next",
+    "vercel-build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build && rm -rf .next && cp -R frontend/.next .next",
     "compile": "hardhat compile",
     "test": "hardhat test",
     "deploy:alfajores": "hardhat run scripts/deploy.js --network alfajores",

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useAccount, useReadContract } from "wagmi";
 import { parseEther } from "viem";
-import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { RarityBadge } from "@/components/RarityBadge";
 import { Notification } from "@/components/Notification";
@@ -89,7 +89,10 @@ export default function ListNFTPage() {
         <main className="mx-auto max-w-4xl px-4 py-8 md:py-10">
           <div className="section-shell glass-surface rounded-[2rem] border border-rose-200/16 px-6 py-20 text-center">
             <p className="mb-4 text-5xl">⛔</p>
-            <p className="text-2xl font-semibold text-rose-100" style={{ fontFamily: "var(--font-heading)" }}>
+            <p
+              className="text-2xl font-semibold text-rose-100"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
               You don&apos;t own this NFT
             </p>
             <Link
@@ -117,118 +120,128 @@ export default function ListNFTPage() {
 
         <div className="mb-8 section-shell glass-surface rounded-[2rem] px-6 py-8 md:px-8">
           <span className="eyebrow">Listing Flow</span>
-          <h1 className="mt-4 text-5xl font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+          <h1
+            className="mt-4 text-5xl font-semibold text-white"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
             List NFT for Sale
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-8 text-slate-300 md:text-base">
-            Prepare the asset for market, approve transfer rights once, then set a USDm price that feels right for your rarity tier.
+            Prepare the asset for market, approve transfer rights once, then set a USDm
+            price that feels right for your rarity tier.
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
           <div className="feature-card overflow-hidden rounded-[1.8rem]">
-          <div
-            className={`flex h-64 items-center justify-center bg-gradient-to-br ${colors.gradient}`}
-          >
-            <span className="text-7xl font-bold text-white/20">
-              #{tokenId.toString()}
-            </span>
-          </div>
+            <div
+              className={`flex h-64 items-center justify-center bg-gradient-to-br ${colors.gradient}`}
+            >
+              <span className="text-7xl font-bold text-white/20">
+                #{tokenId.toString()}
+              </span>
+            </div>
 
             <div className="space-y-6 p-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
-                CNFT #{tokenId.toString()}
-              </h2>
-              <RarityBadge rarity={rarityNum} />
-            </div>
-            <div className="rounded-[1.4rem] border border-emerald-100/10 bg-white/5 p-4">
-              <p className="text-sm leading-7 text-slate-300">
-                Listing keeps custody logic on-chain while letting buyers discover this NFT directly from the marketplace feed.
-              </p>
-            </div>
+              <div className="flex items-center justify-between">
+                <h2
+                  className="text-2xl font-semibold text-white"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  CNFT #{tokenId.toString()}
+                </h2>
+                <RarityBadge rarity={rarityNum} />
+              </div>
 
-            {!isApproved ? (
-              <div className="space-y-4">
-                <div className="rounded-[1.4rem] border border-amber-100/14 bg-amber-200/10 p-4">
-                  <p className="text-sm leading-7 text-slate-200">
-                    <span className="font-medium text-amber-100">
-                      Step 1:
-                    </span>{" "}
-                    Approve the marketplace contract to transfer this NFT on
-                    your behalf.
-                  </p>
-                </div>
-                <button
-                  onClick={() => approve(tokenId)}
-                  disabled={approvePending || approveConfirming}
-                  className="button-shine w-full rounded-full bg-gradient-to-r from-cyan-300 to-emerald-300 py-3.5 font-semibold text-[#063433] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {approvePending
-                    ? "Confirm in wallet..."
-                    : approveConfirming
-                      ? "Approving..."
-                      : "Approve Marketplace"}
-                </button>
+              <div className="rounded-[1.4rem] border border-emerald-100/10 bg-white/5 p-4">
+                <p className="text-sm leading-7 text-slate-300">
+                  Listing keeps custody logic on-chain while letting buyers discover
+                  this NFT directly from the marketplace feed.
+                </p>
               </div>
-            ) : (
-              <div className="space-y-4">
-                <div className="rounded-[1.4rem] border border-emerald-100/14 bg-emerald-200/10 p-4">
-                  <p className="text-sm leading-7 text-slate-200">
-                    <span className="font-medium text-emerald-100">
-                      Step 2:
-                    </span>{" "}
-                    Set your listing price in USDm.
-                  </p>
+
+              {!isApproved ? (
+                <div className="space-y-4">
+                  <div className="rounded-[1.4rem] border border-amber-100/14 bg-amber-200/10 p-4">
+                    <p className="text-sm leading-7 text-slate-200">
+                      <span className="font-medium text-amber-100">Step 1:</span>{" "}
+                      Approve the marketplace contract to transfer this NFT on your
+                      behalf.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => approve(tokenId)}
+                    disabled={approvePending || approveConfirming}
+                    className="button-shine w-full rounded-full bg-gradient-to-r from-cyan-300 to-emerald-300 py-3.5 font-semibold text-[#063433] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {approvePending
+                      ? "Confirm in wallet..."
+                      : approveConfirming
+                        ? "Approving..."
+                        : "Approve Marketplace"}
+                  </button>
                 </div>
-                <div>
-                  <label className="mb-2 block text-sm text-slate-400">
-                    Price (USDm)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.001"
-                    min="0.001"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    placeholder="0.05"
-                    className="w-full rounded-[1.2rem] border border-emerald-100/10 bg-white/5 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-emerald-100/24 focus:ring-2 focus:ring-emerald-300/20"
-                  />
-                </div>
-                <button
-                  onClick={() => {
-                    if (price && parseFloat(price) > 0) {
-                      list(tokenId, parseEther(price));
+              ) : (
+                <div className="space-y-4">
+                  <div className="rounded-[1.4rem] border border-emerald-100/14 bg-emerald-200/10 p-4">
+                    <p className="text-sm leading-7 text-slate-200">
+                      <span className="font-medium text-emerald-100">Step 2:</span>{" "}
+                      Set your listing price in USDm.
+                    </p>
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm text-slate-400">
+                      Price (USDm)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.001"
+                      min="0.001"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      placeholder="0.05"
+                      className="w-full rounded-[1.2rem] border border-emerald-100/10 bg-white/5 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-emerald-100/24 focus:ring-2 focus:ring-emerald-300/20"
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (price && parseFloat(price) > 0) {
+                        list(tokenId, parseEther(price));
+                      }
+                    }}
+                    disabled={
+                      listPending ||
+                      listConfirming ||
+                      !price ||
+                      parseFloat(price) <= 0
                     }
-                  }}
-                  disabled={
-                    listPending ||
-                    listConfirming ||
-                    !price ||
-                    parseFloat(price) <= 0
-                  }
-                  className="button-shine w-full rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 py-3.5 font-semibold text-[#062f2e] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {listPending
-                    ? "Confirm in wallet..."
-                    : listConfirming
-                      ? "Listing..."
-                      : "List for Sale"}
-                </button>
-              </div>
-            )}
+                    className="button-shine w-full rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 py-3.5 font-semibold text-[#062f2e] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {listPending
+                      ? "Confirm in wallet..."
+                      : listConfirming
+                        ? "Listing..."
+                        : "List for Sale"}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
           <aside className="feature-card rounded-[1.8rem] p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Seller Notes</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              Seller Notes
+            </p>
             <div className="mt-5 space-y-4">
               {[
                 "Approval only grants the marketplace permission to move this NFT during a sale.",
                 "Pricing is entered in USDm for more stable collector-facing value.",
                 "After listing, your NFT will become visible on the live marketplace feed.",
               ].map((item, index) => (
-                <div key={item} className="rounded-[1.4rem] border border-emerald-100/10 bg-white/5 p-4">
+                <div
+                  key={item}
+                  className="rounded-[1.4rem] border border-emerald-100/10 bg-white/5 p-4"
+                >
                   <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-slate-400">
                     Tip {index + 1}
                   </p>
@@ -236,7 +249,7 @@ export default function ListNFTPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </aside>
         </div>
 
         {approveSuccess && (

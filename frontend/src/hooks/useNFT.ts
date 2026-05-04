@@ -6,6 +6,7 @@ import {
   useWaitForTransactionReceipt,
   useReadContract,
   useAccount,
+  usePublicClient,
 } from "wagmi";
 import { nftAbi, erc20Abi } from "@/lib/abis";
 import { NFT_ADDRESS, MARKETPLACE_ADDRESS, MINT_PRICES, USDM_ADDRESS } from "@/lib/config";
@@ -13,7 +14,9 @@ import { NFT_ADDRESS, MARKETPLACE_ADDRESS, MINT_PRICES, USDM_ADDRESS } from "@/l
 /** Hook update 40-7 */
 export function useMintNFT(rarity: 0 | 1 | 2) {
   const { address } = useAccount();
+  const publicClient = usePublicClient();
   const [locallyApprovedAmount, setLocallyApprovedAmount] = useState<bigint>(0n);
+  const [localError, setLocalError] = useState<Error | null>(null);
   const { writeContract: writeMint, data: mintHash, isPending: isMintPending, error: mintError, reset: resetMint } = useWriteContract();
   const { writeContract: writeApprove, data: approveHash, isPending: isApprovePending, error: approveError, reset: resetApprove } = useWriteContract();
 
@@ -48,6 +51,7 @@ export function useMintNFT(rarity: 0 | 1 | 2) {
   }, [isMintSuccess, refetchAllowance]);
 
   const approve = () => {
+    setLocalError(null);
     writeApprove({
       address: USDM_ADDRESS,
       abi: erc20Abi,
@@ -56,7 +60,42 @@ export function useMintNFT(rarity: 0 | 1 | 2) {
     });
   };
 
-  const mint = () => {
+  const mint = async () => {
+    setLocalError(null);
+    if (!address || !publicClient) {
+      setLocalError(new Error("Wallet not connected."));
+      return;
+    }
+
+    const [latestAllowance, usdmBalance] = await Promise.all([
+      publicClient.readContract({
+        address: USDM_ADDRESS,
+        abi: erc20Abi,
+        functionName: "allowance",
+        args: [address, NFT_ADDRESS],
+      }),
+      publicClient.readContract({
+        address: USDM_ADDRESS,
+        abi: erc20Abi,
+        functionName: "balanceOf",
+        args: [address],
+      }),
+    ]);
+
+    if (latestAllowance < price) {
+      setLocallyApprovedAmount(0n);
+      setLocalError(
+        new Error("USDm approval is not active yet. Please wait a few seconds and try again.")
+      );
+      refetchAllowance();
+      return;
+    }
+
+    if (usdmBalance < price) {
+      setLocalError(new Error("Insufficient USDm balance to mint this NFT."));
+      return;
+    }
+
     writeMint({
       address: NFT_ADDRESS,
       abi: nftAbi,
@@ -67,6 +106,7 @@ export function useMintNFT(rarity: 0 | 1 | 2) {
 
   const reset = () => {
     setLocallyApprovedAmount(0n);
+    setLocalError(null);
     resetMint();
     resetApprove();
   };
@@ -86,7 +126,7 @@ export function useMintNFT(rarity: 0 | 1 | 2) {
     isApproveSuccess,
     mintError,
     approveError,
-    error: mintError || approveError,
+    error: localError || mintError || approveError,
     reset,
   };
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   useWriteContract,
   useWaitForTransactionReceipt,
@@ -28,6 +29,12 @@ export function useMintNFT(rarity: 0 | 1 | 2) {
 
   const price = MINT_PRICES[rarity];
   const needsApproval = allowance === undefined || allowance < price;
+
+  useEffect(() => {
+    if (isApproveSuccess) {
+      refetchAllowance();
+    }
+  }, [isApproveSuccess, refetchAllowance]);
 
   const approve = () => {
     writeApprove({

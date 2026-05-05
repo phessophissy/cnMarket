@@ -22,6 +22,7 @@ export default function MintPage() {
     mint,
     approve,
     needsApproval,
+    error,
     refetchAllowance,
     mintHash,
     approveHash,
@@ -31,8 +32,6 @@ export default function MintPage() {
     isApproveConfirming,
     isMintSuccess,
     isApproveSuccess,
-    mintError,
-    approveError,
     reset,
   } = useMintNFT(selectedRarity);
 
@@ -230,10 +229,10 @@ export default function MintPage() {
           />
         )}
 
-        {(mintError || approveError) && (
+        {error && (
           <Notification
             type="error"
-            message={((mintError || approveError) as Error).message.slice(0, 120)}
+            message={(error as Error).message.slice(0, 120)}
             onClose={reset}
           />
         )}

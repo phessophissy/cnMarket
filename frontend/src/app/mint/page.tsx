@@ -44,6 +44,7 @@ export default function MintPage() {
     isApprovePending ||
     isMintConfirming ||
     isApproveConfirming;
+  const mintDisabled = isBusy || needsApproval;
 
   const handleSuccess = () => {
     reset();
@@ -154,34 +155,45 @@ export default function MintPage() {
                     </p>
 
                     {isSelected && (
-                      <button
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          if (needsApproval) {
-                            approve();
-                            return;
-                          }
-                          mint();
-                        }}
-                        disabled={isBusy}
-                        className={`button-shine w-full rounded-full py-3.5 font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${
-                          needsApproval
-                            ? "bg-gradient-to-r from-amber-300 to-yellow-300 text-[#073631] hover:brightness-105"
-                            : "bg-gradient-to-r from-emerald-300 to-teal-300 text-[#073631] hover:brightness-105"
-                        }`}
-                      >
-                        {needsApproval
-                          ? isApprovePending
-                            ? "Confirm in wallet..."
-                            : isApproveConfirming
-                              ? "Approving..."
-                              : "Approve USDm"
-                          : isMintPending
-                            ? "Confirm in wallet..."
-                            : isMintConfirming
-                              ? "Minting..."
-                              : "Mint"}
-                      </button>
+                      <div className="space-y-3">
+                        <div className="grid gap-3 sm:grid-cols-2">
+                          <button
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              approve();
+                            }}
+                            disabled={isBusy || !needsApproval}
+                            className="button-shine rounded-full bg-gradient-to-r from-amber-300 to-yellow-300 py-3.5 font-semibold text-[#073631] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            {isApprovePending
+                              ? "Confirm..."
+                              : isApproveConfirming
+                                ? "Approving..."
+                                : needsApproval
+                                  ? "Approve USDm"
+                                  : "Approved"}
+                          </button>
+                          <button
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              mint();
+                            }}
+                            disabled={mintDisabled}
+                            className="button-shine rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 py-3.5 font-semibold text-[#073631] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            {isMintPending
+                              ? "Confirm..."
+                              : isMintConfirming
+                                ? "Minting..."
+                                : "Mint NFT"}
+                          </button>
+                        </div>
+                        <p className="text-xs leading-6 text-slate-400">
+                          {needsApproval
+                            ? "Approve USDm first, then tap Mint NFT as soon as the approval confirms."
+                            : "Approval is active. You can mint this NFT now."}
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>

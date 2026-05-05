@@ -44,7 +44,7 @@ export default function MintPage() {
     isApprovePending ||
     isMintConfirming ||
     isApproveConfirming;
-  const mintDisabled = isBusy || needsApproval;
+  const mintDisabled = isBusy;
 
   const handleSuccess = () => {
     reset();
@@ -190,7 +190,7 @@ export default function MintPage() {
                         </div>
                         <p className="text-xs leading-6 text-slate-400">
                           {needsApproval
-                            ? "Approve USDm first, then tap Mint NFT as soon as the approval confirms."
+                            ? "You can tap Mint NFT after approval. If the chain has not indexed the approval yet, the app will tell you."
                             : "Approval is active. You can mint this NFT now."}
                         </p>
                       </div>

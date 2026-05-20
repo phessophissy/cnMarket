@@ -45,6 +45,7 @@ scripts/generate-wallets.js
 scripts/fund-wallets.js
 scripts/generate-prs.sh
 scripts/generate-prs-cont.sh
+scripts/generate-batch-prs.sh
 generate-commits.sh
 generate-commits-2.sh
 /tmp/fix-prs.sh

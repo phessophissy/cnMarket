@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, notFound } from "next/navigation";
 import { useAccount, useReadContract } from "wagmi";
 import { formatEther } from "viem";
 import Link from "next/link";
@@ -18,29 +18,40 @@ import { useBuyNFT, useCancelListing } from "@/hooks/useMarketplace";
 
 export default function NFTDetailPage() {
   const params = useParams();
-  const tokenId = BigInt(params.id as string);
+  const idStr = params.id as string;
+  const isValidId = /^\d+$/.test(idStr || "");
+
+  const tokenId = isValidId ? BigInt(idStr) : 0n;
   const { address } = useAccount();
 
   const { data: owner } = useReadContract({
     address: NFT_ADDRESS,
     abi: nftAbi,
     functionName: "ownerOf",
-    args: [tokenId],
+    args: isValidId ? [tokenId] : undefined,
+    query: { enabled: isValidId },
   });
 
   const { data: rarity } = useReadContract({
     address: NFT_ADDRESS,
     abi: nftAbi,
     functionName: "tokenRarity",
-    args: [tokenId],
+    args: isValidId ? [tokenId] : undefined,
+    query: { enabled: isValidId },
   });
 
   const { data: listing } = useReadContract({
     address: MARKETPLACE_ADDRESS,
     abi: marketplaceAbi,
     functionName: "getListing",
-    args: [tokenId],
+    args: isValidId ? [tokenId] : undefined,
+    query: { enabled: isValidId },
   });
+
+  // Call notFound after hooks have been declared to avoid violating the Rules of Hooks
+  if (!isValidId) {
+    notFound();
+  }
 
   const {
     buy,

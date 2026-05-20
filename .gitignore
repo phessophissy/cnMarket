@@ -51,3 +51,6 @@ generate-commits-2.sh
 /tmp/fix-prs.sh
 pr-gen.log
 pr-gen-cont.log
+
+# Separate repos
+sdk/

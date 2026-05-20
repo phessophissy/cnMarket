@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, notFound } from "next/navigation";
 import { useAccount, useReadContract } from "wagmi";
 import { parseEther } from "viem";
 import { Navbar } from "@/components/Navbar";
@@ -16,7 +16,10 @@ import { useListNFT } from "@/hooks/useMarketplace";
 export default function ListNFTPage() {
   const params = useParams();
   const router = useRouter();
-  const tokenId = BigInt(params.id as string);
+  const idStr = params.id as string;
+  const isValidId = /^\d+$/.test(idStr || "");
+
+  const tokenId = isValidId ? BigInt(idStr) : 0n;
   const { address } = useAccount();
   const [price, setPrice] = useState("");
   const [localApproved, setLocalApproved] = useState(false);
@@ -25,22 +28,30 @@ export default function ListNFTPage() {
     address: NFT_ADDRESS,
     abi: nftAbi,
     functionName: "ownerOf",
-    args: [tokenId],
+    args: isValidId ? [tokenId] : undefined,
+    query: { enabled: isValidId },
   });
 
   const { data: rarity } = useReadContract({
     address: NFT_ADDRESS,
     abi: nftAbi,
     functionName: "tokenRarity",
-    args: [tokenId],
+    args: isValidId ? [tokenId] : undefined,
+    query: { enabled: isValidId },
   });
 
   const { data: approved } = useReadContract({
     address: NFT_ADDRESS,
     abi: nftAbi,
     functionName: "getApproved",
-    args: [tokenId],
+    args: isValidId ? [tokenId] : undefined,
+    query: { enabled: isValidId },
   });
+
+  // Call notFound after hooks have been declared to avoid violating the Rules of Hooks
+  if (!isValidId) {
+    notFound();
+  }
 
   const {
     approve,

@@ -1,0 +1,13 @@
+const { expect } = require("chai");
+
+describe("Batch 90 - Module 3", function () {
+  it("Should return correct batch metadata", async function () {
+    const metadata = {
+      batch: 90,
+      commit: 3,
+      timestamp: "1779313732.031181317"
+    };
+    expect(metadata.batch).to.equal(90);
+    expect(metadata.commit).to.equal(3);
+  });
+});

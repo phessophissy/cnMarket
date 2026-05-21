@@ -45,6 +45,8 @@ export { CopyButton } from "./CopyButton";
 
 // Overlay
 export { Modal } from "./Modal";
+export { FaucetModal } from "./FaucetModal";
+
 
 // Misc
 export { ExternalLink } from "./ExternalLink";

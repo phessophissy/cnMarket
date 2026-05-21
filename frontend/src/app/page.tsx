@@ -1,51 +1,22 @@
 "use client";
 
-import { useReadContract } from "wagmi";
-import { Navbar } from "@/components/Navbar";
-import { NFTCard, NFTCardSkeleton } from "@/components/NFTCard";
-import { nftAbi, marketplaceAbi } from "@/lib/abis";
-import { NFT_ADDRESS, MARKETPLACE_ADDRESS } from "@/lib/config";
-
-function ListingCard({ index }: { index: number }) {
-  const { data: listing } = useReadContract({
-    address: MARKETPLACE_ADDRESS,
-    abi: marketplaceAbi,
-    functionName: "getActiveListingAt",
-    args: [BigInt(index)],
-  });
-
-  const tokenId = listing?.[0];
-
-  const { data: rarity } = useReadContract({
-    address: NFT_ADDRESS,
-    abi: nftAbi,
-    functionName: "tokenRarity",
-    args: tokenId !== undefined ? [tokenId] : undefined,
-    query: { enabled: tokenId !== undefined },
-  });
-
-  if (!listing) return <NFTCardSkeleton />;
-
-  const [tid, seller, price] = listing;
-
-  return (
-    <NFTCard
-      tokenId={tid}
-      rarity={(rarity ?? 0) as 0 | 1 | 2}
-      price={price}
-      seller={seller}
-    />
-  );
-}
+import { Navbar, NFTCard, NFTCardSkeleton, SearchBar, RarityFilter, SortSelect } from "@/components";
+import { useAllActiveListings, useMarketplaceFilters } from "@/hooks";
 
 export default function HomePage() {
-  const { data: count, isLoading } = useReadContract({
-    address: MARKETPLACE_ADDRESS,
-    abi: marketplaceAbi,
-    functionName: "getActiveListingCount",
-  });
+  const { listings, isLoading } = useAllActiveListings();
+  const {
+    searchQuery,
+    setSearchQuery,
+    rarityFilter,
+    setRarityFilter,
+    sortBy,
+    setSortBy,
+    filterAndSort,
+  } = useMarketplaceFilters();
 
-  const listingCount = count ? Number(count) : 0;
+  const filteredListings = filterAndSort(listings);
+  const listingCount = listings.length;
 
   return (
     <>
@@ -163,7 +134,7 @@ export default function HomePage() {
           ))}
         </section>
 
-        <section className="flex items-end justify-between gap-4">
+        <section className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="eyebrow">Marketplace Feed</span>
             <h2 className="mt-4 text-3xl font-semibold text-white md:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
@@ -175,6 +146,17 @@ export default function HomePage() {
           </div>
           <div className="hidden rounded-full border border-emerald-100/12 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300 md:inline-flex">
             {listingCount} live listings
+          </div>
+        </section>
+
+        {/* Filters and Search Bar Section */}
+        <section className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between rounded-[1.75rem] border border-emerald-100/10 bg-white/5 p-5">
+          <div className="flex-1 lg:max-w-md">
+            <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <RarityFilter selected={rarityFilter} onChange={setRarityFilter} />
+            <SortSelect value={sortBy} onChange={setSortBy} />
           </div>
         </section>
 
@@ -200,10 +182,35 @@ export default function HomePage() {
               Mint your first NFT
             </a>
           </div>
+        ) : filteredListings.length === 0 ? (
+          <div className="section-shell glass-surface rounded-[2rem] border border-emerald-100/10 px-6 py-16 text-center">
+            <p className="mb-4 text-4xl">🔍</p>
+            <p className="text-xl font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+              No matching listings found
+            </p>
+            <p className="mx-auto mt-2 max-w-md text-sm text-slate-300">
+              We couldn't find any listings matching "{searchQuery}" or selected filters. Try broadening your criteria.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setRarityFilter(null);
+              }}
+              className="mt-6 inline-flex rounded-full border border-emerald-100/14 bg-white/5 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-white/10"
+            >
+              Reset Filters
+            </button>
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {Array.from({ length: listingCount }, (_, i) => (
-              <ListingCard key={i} index={i} />
+            {filteredListings.map((listing) => (
+              <NFTCard
+                key={listing.tokenId.toString()}
+                tokenId={listing.tokenId}
+                rarity={listing.rarity}
+                price={listing.price}
+                seller={listing.seller}
+              />
             ))}
           </div>
         )}

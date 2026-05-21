@@ -13,3 +13,5 @@ export { useMiniPayStatus } from "./useMiniPayStatus";
 export { useErrorHandler } from "./useErrorHandler";
 export { useTransaction_toast } from "./useTransaction_toast";
 export { useWallet_balance_display } from "./useWallet_balance_display";
+export { useFaucet } from "./useFaucet";
+

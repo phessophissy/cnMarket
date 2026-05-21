@@ -1,10 +1,12 @@
 "use client";
 
-import { Navbar, NFTCard, NFTCardSkeleton, SearchBar, RarityFilter, SortSelect } from "@/components";
+import { Navbar, NFTCard, NFTCardSkeleton, SearchBar, RarityFilter, SortSelect, StatsHub } from "@/components";
 import { useAllActiveListings, useMarketplaceFilters } from "@/hooks";
+import { calculateMarketStats } from "@/lib/stats";
 
 export default function HomePage() {
   const { listings, isLoading } = useAllActiveListings();
+  const marketStats = calculateMarketStats(listings);
   const {
     searchQuery,
     setSearchQuery,
@@ -133,6 +135,8 @@ export default function HomePage() {
             </div>
           ))}
         </section>
+
+        <StatsHub stats={marketStats} />
 
         <section className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>

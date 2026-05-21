@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { getInjectedConnector, getPreferredConnector } from "@/lib/connectors";
 import { Logo } from "./Logo";
 import Link from "next/link";
+import { FaucetModal } from "./FaucetModal";
+
 
 /** Component update 47-5 */
 export function Navbar() {
@@ -15,6 +17,8 @@ export function Navbar() {
   const { disconnect } = useDisconnect();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMiniPay, setIsMiniPay] = useState(false);
+  const [isFaucetOpen, setIsFaucetOpen] = useState(false);
+
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.ethereum?.isMiniPay) {
@@ -73,7 +77,14 @@ export function Navbar() {
                   MiniPay
                 </span>
               )}
+              <button
+                onClick={() => setIsFaucetOpen(true)}
+                className="rounded-full border border-emerald-100/14 bg-emerald-200/10 px-3.5 py-2 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-200/20"
+              >
+                Faucet
+              </button>
               {isConnected ? (
+
                 <div className="flex items-center gap-2 sm:gap-3">
                   <span className="hidden md:inline-flex rounded-full border border-emerald-100/14 bg-emerald-200/10 px-4 py-2 text-sm font-mono text-emerald-50">
                     {address?.slice(0, 6)}...{address?.slice(-4)}
@@ -135,6 +146,8 @@ export function Navbar() {
           )}
         </div>
       </div>
+      <FaucetModal isOpen={isFaucetOpen} onClose={() => setIsFaucetOpen(false)} />
     </nav>
   );
 }
+

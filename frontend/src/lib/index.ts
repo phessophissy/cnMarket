@@ -17,3 +17,5 @@ export * from './_celo_chain_config_add_configuration';
 export * from './_loading_skeleton_ui_add_configuration';
 export * from './_nft_price_display_add_configuration';
 export * from './_minipay_send_tx_add_configuration';
+export { calculateMarketStats } from "./stats";
+export type { MarketStats } from "./stats";

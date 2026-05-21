@@ -22,10 +22,12 @@ export function NFTCard({
   showListButton,
 }: NFTCardProps) {
   const colors = RARITY_COLORS[rarity];
+  const glowClass = rarity === 1 ? "glow-rare" : rarity === 2 ? "glow-legendary" : "";
 
   return (
     <Link href={`/nft/${tokenId.toString()}`}>
-      <div className="feature-card card-hover group cursor-pointer overflow-hidden rounded-[1.7rem]">
+      <div className={`feature-card card-hover holo-shine group cursor-pointer overflow-hidden rounded-[1.7rem] ${glowClass}`}>
+
         <div
           className={`relative flex h-56 items-center justify-center overflow-hidden bg-gradient-to-br ${colors.gradient}`}
         >

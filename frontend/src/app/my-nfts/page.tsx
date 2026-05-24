@@ -1,8 +1,7 @@
 "use client";
 
 import { useAccount, useReadContract } from "wagmi";
-import { Navbar } from "@/components/Navbar";
-import { NFTCard, NFTCardSkeleton } from "@/components/NFTCard";
+import { Navbar, NFTCard, NFTCardSkeleton, ActivityLogTable } from "@/components";
 import { nftAbi, marketplaceAbi } from "@/lib/abis";
 import { NFT_ADDRESS, MARKETPLACE_ADDRESS } from "@/lib/config";
 
@@ -155,6 +154,18 @@ export default function MyNFTsPage() {
                 <OwnedNFTCard key={i} ownerAddress={address!} index={i} />
               ))}
             </div>
+          </section>
+        )}
+
+        {isConnected && (
+          <section className="mt-12">
+            <div className="mb-5">
+              <span className="eyebrow">Transaction Log</span>
+              <h2 className="mt-4 text-3xl font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+                Device Action Log
+              </h2>
+            </div>
+            <ActivityLogTable limit={10} />
           </section>
         )}
       </main>

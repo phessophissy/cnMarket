@@ -1,12 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useParams, notFound } from "next/navigation";
 import { useAccount, useReadContract } from "wagmi";
 import { formatEther } from "viem";
 import Link from "next/link";
-import { Navbar } from "@/components/Navbar";
-import { RarityBadge } from "@/components/RarityBadge";
-import { Notification } from "@/components/Notification";
+import { Navbar, RarityBadge, Notification, CopyButton } from "@/components";
 import { nftAbi, marketplaceAbi } from "@/lib/abis";
 import {
   NFT_ADDRESS,
@@ -23,6 +22,11 @@ export default function NFTDetailPage() {
 
   const tokenId = isValidId ? BigInt(idStr) : 0n;
   const { address } = useAccount();
+
+  const [shareUrl, setShareUrl] = useState("");
+  useEffect(() => {
+    setShareUrl(window.location.href);
+  }, []);
 
   const { data: owner } = useReadContract({
     address: NFT_ADDRESS,
@@ -129,8 +133,13 @@ export default function NFTDetailPage() {
               <h1 className="mt-5 text-4xl font-semibold text-white md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
                 CNFT #{tokenId.toString()}
               </h1>
-              <div className="mt-4">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                 <RarityBadge rarity={rarityNum} />
+                <CopyButton
+                  text={shareUrl}
+                  label="Copy Share Link"
+                  className="rounded-full border border-emerald-100/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-300 transition hover:bg-white/10 hover:text-white"
+                />
               </div>
               <p className="mt-5 text-sm leading-8 text-slate-300 md:text-base">
                 Inspect ownership, listing status, and purchase controls for this collectible before you take action on-chain.

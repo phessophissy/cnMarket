@@ -16,3 +16,5 @@ export { useWallet_balance_display } from "./useWallet_balance_display";
 export { useFaucet } from "./useFaucet";
 export { useMarketplaceFilters } from "./useMarketplaceFilters";
 export { useAllActiveListings } from "./useAllActiveListings";
+export { useActivityLog } from "./useActivityLog";
+export type { ActivityItem } from "./useActivityLog";

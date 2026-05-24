@@ -63,3 +63,4 @@ export { MintHistory } from "./MintHistory";
 export { GasEstimate } from "./GasEstimate";
 export { MintPriceCard } from "./MintPriceCard";
 export { StatsHub } from "./StatsHub";
+export { ActivityLogTable } from "./ActivityLogTable";

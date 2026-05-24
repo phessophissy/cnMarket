@@ -79,20 +79,19 @@ export function Navbar() {
               )}
               <button
                 onClick={() => setIsFaucetOpen(true)}
-                className="rounded-full border border-emerald-100/14 bg-emerald-200/10 px-3.5 py-2 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-200/20"
+                className="hidden md:inline-flex rounded-full border border-emerald-100/14 bg-emerald-200/10 px-3.5 py-2 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-200/20"
               >
                 Faucet
               </button>
               {isConnected ? (
-
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <span className="hidden md:inline-flex rounded-full border border-emerald-100/14 bg-emerald-200/10 px-4 py-2 text-sm font-mono text-emerald-50">
+                  <span className="rounded-full border border-emerald-100/14 bg-emerald-200/10 px-3.5 py-1.5 text-xs font-mono text-emerald-50 md:text-sm md:px-4 md:py-2">
                     {address?.slice(0, 6)}...{address?.slice(-4)}
                   </span>
                   {!isMiniPay && (
                     <button
                       onClick={() => disconnect()}
-                      className="rounded-full border border-rose-200/18 bg-rose-400/12 px-4 py-2 text-sm font-semibold text-rose-100 transition hover:bg-rose-400/18"
+                      className="hidden md:inline-flex rounded-full border border-rose-200/18 bg-rose-400/12 px-4 py-2 text-sm font-semibold text-rose-100 transition hover:bg-rose-400/18"
                     >
                       Disconnect
                     </button>
@@ -138,12 +137,36 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              
+              <button
+                onClick={() => {
+                  setIsFaucetOpen(true);
+                  setMobileOpen(false);
+                }}
+                className="mt-3 w-full rounded-2xl border border-emerald-100/14 bg-emerald-200/10 py-2.5 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-200/20"
+              >
+                Mock USDm Faucet
+              </button>
+
+              {isConnected && !isMiniPay && (
+                <button
+                  onClick={() => {
+                    disconnect();
+                    setMobileOpen(false);
+                  }}
+                  className="mt-2 w-full rounded-2xl border border-rose-200/18 bg-rose-400/12 py-2.5 text-sm font-semibold text-rose-100 transition hover:bg-rose-400/18"
+                >
+                  Disconnect Wallet
+                </button>
+              )}
+
               <div className="mt-3 flex items-center justify-between rounded-2xl border border-emerald-100/10 bg-white/5 px-4 py-3 text-xs uppercase tracking-[0.18em] text-slate-400">
                 <span>Chain</span>
                 <span className="text-emerald-100">Celo Mainnet</span>
               </div>
             </div>
           )}
+
         </div>
       </div>
       <FaucetModal isOpen={isFaucetOpen} onClose={() => setIsFaucetOpen(false)} />

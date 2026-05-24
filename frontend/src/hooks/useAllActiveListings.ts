@@ -46,7 +46,7 @@ export function useAllActiveListings() {
     return listingsData
       .map((res) => {
         if (res.status === "success" && res.result) {
-          const [tid] = res.result as [bigint, string, bigint];
+          const [tid] = res.result as unknown as [bigint, string, bigint];
           return tid;
         }
         return null;
@@ -79,12 +79,12 @@ export function useAllActiveListings() {
 
     listingsData.forEach((res, index) => {
       if (res.status === "success" && res.result) {
-        const [tid, seller, price] = res.result as [bigint, string, bigint];
+        const [tid, seller, price] = res.result as unknown as [bigint, string, bigint];
         
         // Find corresponding rarity
         let rarityVal: 0 | 1 | 2 = 0;
         if (raritiesData && raritiesData[index] && raritiesData[index].status === "success") {
-          rarityVal = (raritiesData[index].result ?? 0) as 0 | 1 | 2;
+          rarityVal = Number(raritiesData[index].result ?? 0n) as 0 | 1 | 2;
         }
 
         result.push({

@@ -193,7 +193,7 @@ export default function HomePage() {
               No matching listings found
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm text-slate-300">
-              We couldn't find any listings matching "{searchQuery}" or selected filters. Try broadening your criteria.
+              We couldn&apos;t find any listings matching &ldquo;{searchQuery}&rdquo; or selected filters. Try broadening your criteria.
             </p>
             <button
               onClick={() => {

@@ -60,6 +60,10 @@ contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
         _rarityURIs[Rarity.Legendary] = legendaryURI;
     }
 
+    /// @notice Mints a new NFT of the given rarity to the caller after taking USDm payment.
+    /// @dev Requires the caller to have approved this contract to spend at least the
+    ///      rarity's mint price in USDm. Reverts on insufficient allowance or transfer failure.
+    /// @param rarity The rarity tier to mint.
     function mint(Rarity rarity) external {
         uint256 price = mintPrices[rarity];
         require(
@@ -78,11 +82,16 @@ contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
         emit NFTMinted(msg.sender, tokenId, rarity);
     }
 
+    /// @notice Updates the USDm token used for mint payments.
+    /// @dev Only callable by the contract owner. The zero address is rejected.
+    /// @param usdmToken_ New USDm token address.
     function setUsdmToken(address usdmToken_) external onlyOwner {
         require(usdmToken_ != address(0), "Invalid USDm address");
         usdmToken = IERC20(usdmToken_);
     }
 
+    /// @notice Withdraws the entire USDm balance held by this contract to the owner.
+    /// @dev Only callable by the contract owner. Reverts if there is nothing to withdraw.
     function withdrawUSDm() external onlyOwner {
         uint256 bal = usdmToken.balanceOf(address(this));
         require(bal > 0, "Nothing to withdraw");

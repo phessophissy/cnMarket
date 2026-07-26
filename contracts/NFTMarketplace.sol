@@ -5,13 +5,24 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+/// @title NFTMarketplace — peer-to-peer NFT sales paid in USDm
+/// @notice Allows NFT owners to list tokens for sale at a fixed USDm price,
+///         buyers to purchase listed tokens, and sellers to cancel listings.
+/// @dev Uses a swap-and-pop active-listing array for O(1) enumeration and removal,
+///      and ReentrancyGuard to protect purchases.
 contract NFTMarketplace is ReentrancyGuard {
+    /// @notice A fixed-price sale listing for a single token.
+    /// @param seller Address of the current owner selling the token.
+    /// @param price  Sale price in USDm base units.
     struct Listing {
         address seller;
         uint256 price;
     }
 
+    /// @notice The ERC-721 NFT being traded (immutable).
     IERC721 public immutable nftContract;
+
+    /// @notice The USDm ERC-20 token used for payments (immutable).
     IERC20 public immutable usdmToken;
 
     mapping(uint256 => Listing) public listings;
@@ -19,10 +30,28 @@ contract NFTMarketplace is ReentrancyGuard {
     mapping(uint256 => uint256) private _activeIndex;
     mapping(uint256 => bool) private _isActive;
 
+    /// @notice Emitted when an NFT is listed for sale.
+    /// @param tokenId ID of the listed token.
+    /// @param seller  Address of the seller (token owner).
+    /// @param price   Sale price in USDm base units.
     event NFTListed(uint256 indexed tokenId, address indexed seller, uint256 price);
+
+    /// @notice Emitted when an active listing is cancelled by the seller.
+    /// @param tokenId ID of the delisted token.
+    /// @param seller  Address of the seller who cancelled.
     event NFTDelisted(uint256 indexed tokenId, address indexed seller);
+
+    /// @notice Emitted when a listed NFT is purchased.
+    /// @param tokenId ID of the sold token.
+    /// @param seller  Address of the previous owner (seller).
+    /// @param buyer   Address of the purchaser.
+    /// @param price   Sale price paid in USDm base units.
     event NFTSold(uint256 indexed tokenId, address indexed seller, address indexed buyer, uint256 price);
 
+    /// @notice Deploys the marketplace bound to an NFT contract and USDm token.
+    /// @dev Both addresses must be non-zero.
+    /// @param _nftContract Address of the ERC-721 NFT contract.
+    /// @param _usdmToken   Address of the USDm ERC-20 token used for payments.
     constructor(address _nftContract, address _usdmToken) {
         require(_nftContract != address(0), "Invalid NFT address");
         require(_usdmToken != address(0), "Invalid USDm address");

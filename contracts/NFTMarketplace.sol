@@ -120,6 +120,10 @@ contract NFTMarketplace is ReentrancyGuard {
         emit NFTSold(tokenId, listing.seller, msg.sender, listing.price);
     }
 
+    /// @notice Removes a listing and maintains the swap-and-pop active-listing array.
+    /// @dev Moves the last active token into the freed slot, updates its index,
+    ///      pops the tail, and clears the listing/index/active flags for the removed token.
+    /// @param tokenId ID of the token whose listing should be removed.
     function _removeListing(uint256 tokenId) private {
         uint256 index = _activeIndex[tokenId];
         uint256 lastTokenId = _activeTokenIds[_activeTokenIds.length - 1];
@@ -133,19 +137,35 @@ contract NFTMarketplace is ReentrancyGuard {
         _isActive[tokenId] = false;
     }
 
+    /// @notice Returns the seller and price for a given token listing.
+    /// @dev Returns zero values if the token is not actively listed.
+    /// @param tokenId ID of the token to query.
+    /// @return seller Address of the seller (zero address if not listed).
+    /// @return price  Sale price in USDm base units (0 if not listed).
     function getListing(uint256 tokenId) external view returns (address seller, uint256 price) {
         Listing memory l = listings[tokenId];
         return (l.seller, l.price);
     }
 
+    /// @notice Whether a token currently has an active listing.
+    /// @param tokenId ID of the token to query.
+    /// @return True if the token is actively listed for sale.
     function isListed(uint256 tokenId) external view returns (bool) {
         return _isActive[tokenId];
     }
 
+    /// @notice Returns the number of currently active listings.
+    /// @return The count of tokens actively listed for sale.
     function getActiveListingCount() external view returns (uint256) {
         return _activeTokenIds.length;
     }
 
+    /// @notice Returns the token ID, seller, and price for an active listing by array index.
+    /// @dev Reverts if the index is out of bounds.
+    /// @param index Position in the active-listing array.
+    /// @return tokenId ID of the token at that index.
+    /// @return seller  Address of the seller.
+    /// @return price   Sale price in USDm base units.
     function getActiveListingAt(uint256 index)
         external
         view

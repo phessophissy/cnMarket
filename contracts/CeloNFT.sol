@@ -6,19 +6,42 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+/// @title CeloNFT — ERC-721 NFT with rarity levels minted via USDm
+/// @notice Mint NFTs in three rarity tiers (Common, Rare, Legendary),
+///         each with its own price and metadata URI. Payments are made in USDm.
+/// @dev Extends ERC721Enumerable for on-chain enumeration and Ownable for
+///      admin-gated configuration of prices, URIs, and the USDm token.
 contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
+    /// @notice Rarity tiers available for minting.
+    /// @return Common   Lowest tier (0.01 ether by default).
+    /// @return Rare     Mid tier (0.03 ether by default).
+    /// @return Legendary Highest tier (0.05 ether by default).
     enum Rarity { Common, Rare, Legendary }
 
     uint256 private _nextTokenId;
 
+    /// @notice The USDm (ERC-20) token accepted for mint payments.
     IERC20 public usdmToken;
 
+    /// @notice Mint price (in USDm base units) for each rarity tier.
     mapping(Rarity => uint256) public mintPrices;
+
+    /// @notice Rarity assigned to each minted token.
     mapping(uint256 => Rarity) public tokenRarity;
+
     mapping(Rarity => string) private _rarityURIs;
 
+    /// @notice Emitted when an NFT is successfully minted.
+    /// @param to       Recipient of the newly minted token.
+    /// @param tokenId  ID of the minted token.
+    /// @param rarity   Rarity tier of the minted token.
     event NFTMinted(address indexed to, uint256 indexed tokenId, Rarity rarity);
 
+    /// @notice Deploys the CeloNFT contract and configures initial rarity prices/URIs.
+    /// @param commonURI    Metadata URI for Common-tier tokens.
+    /// @param rareURI      Metadata URI for Rare-tier tokens.
+    /// @param legendaryURI Metadata URI for Legendary-tier tokens.
+    /// @param usdmToken_   Address of the USDm ERC-20 token used for payments.
     constructor(
         string memory commonURI,
         string memory rareURI,

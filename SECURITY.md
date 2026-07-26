@@ -37,6 +37,26 @@ If you discover a security vulnerability, please:
 2. Email the details to the maintainers
 3. Include steps to reproduce
 
+## Reentrancy & Checks-Effects-Interactions
+
+The marketplace is the only contract that moves both ERC-20 and ERC-721 assets
+in a single transaction, so reentrancy is the primary concern.
+
+- **`NFTMarketplace.buyNFT`** is guarded by OpenZeppelin `ReentrancyGuard`
+  (`nonReentrant`). A malicious ERC-721 receiver cannot re-enter `buyNFT`,
+  `cancelListing`, or `listNFT` while a purchase is in flight.
+- The listing is **removed before** any external call (`_removeListing`
+  precedes the USDm `transferFrom` and the NFT `safeTransferFrom`). This is the
+  Checks-Effects-Interactions pattern: the contract's state is updated first,
+  so a reentrant call (were the guard ever bypassed) would find no active
+  listing to operate on.
+- **`CeloNFT.mint`** uses `_safeMint`, which calls `onERC721Received` on the
+  recipient. If the recipient is an untrusted contract, ensure it implements
+  `IERC721Receiver`; the mint itself does not move external ERC-20 funds into a
+  reentrant path beyond the single `transferFrom`.
+- ERC-20 payments depend on the USDm token's own reentrancy posture. Only a
+  conformant, non-rebasing ERC-20 should be configured via `setUsdmToken`.
+
 ## Best Practices
 
 - Never share your private keys

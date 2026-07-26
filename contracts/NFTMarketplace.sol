@@ -59,7 +59,12 @@ contract NFTMarketplace is ReentrancyGuard {
         usdmToken = IERC20(_usdmToken);
     }
 
-    /** @notice Contract update 38-5 */
+    /// @notice Lists a token for sale at a fixed USDm price.
+    /// @dev The caller must own the token and have approved this marketplace
+    ///      (per-token or per-operator). Reverts if price is zero, the caller is
+    ///      not the owner, the marketplace is not approved, or the token is already listed.
+    /// @param tokenId ID of the token to list.
+    /// @param price   Sale price in USDm base units (must be > 0).
     function listNFT(uint256 tokenId, uint256 price) external {
         require(price > 0, "Price must be greater than 0");
         require(nftContract.ownerOf(tokenId) == msg.sender, "Not the owner");
@@ -78,6 +83,9 @@ contract NFTMarketplace is ReentrancyGuard {
         emit NFTListed(tokenId, msg.sender, price);
     }
 
+    /// @notice Cancels an active listing created by the caller.
+    /// @dev Reverts if the token is not listed or the caller is not the seller.
+    /// @param tokenId ID of the token to delist.
     function cancelListing(uint256 tokenId) external {
         require(_isActive[tokenId], "Not listed");
         require(listings[tokenId].seller == msg.sender, "Not the seller");
@@ -86,6 +94,11 @@ contract NFTMarketplace is ReentrancyGuard {
         emit NFTDelisted(tokenId, msg.sender);
     }
 
+    /// @notice Buys a listed NFT, paying the seller in USDm and transferring the token.
+    /// @dev Protected by `nonReentrant`. The caller must have approved this marketplace
+    ///      to spend at least the listing price in USDm. Reverts if the token is not
+    ///      listed, the buyer is the seller, or the USDm payment/transfer fails.
+    /// @param tokenId ID of the token to purchase.
     function buyNFT(uint256 tokenId) external nonReentrant {
         require(_isActive[tokenId], "Not listed");
         Listing memory listing = listings[tokenId];

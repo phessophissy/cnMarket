@@ -70,4 +70,42 @@ describe("Marketplace enumeration", function () {
       expect(await marketplace.isListed(1)).to.equal(true);
     });
   });
+
+  describe("getActiveListingAt", function () {
+    it("returns the token id, seller, and price for an active listing", async function () {
+      await mintAndApprove(0);
+      await marketplace
+        .connect(seller)
+        .listNFT(0, ethers.parseEther("1.5"));
+
+      const [tokenId, sellerAddr, price] =
+        await marketplace.getActiveListingAt(0);
+
+      expect(tokenId).to.equal(0);
+      expect(sellerAddr).to.equal(seller.address);
+      expect(price).to.equal(ethers.parseEther("1.5"));
+    });
+
+    it("reflects the insertion order for multiple listings", async function () {
+      await mintAndApprove(0);
+      await marketplace.connect(seller).listNFT(0, ethers.parseEther("1"));
+      await mintAndApprove(1);
+      await marketplace.connect(seller).listNFT(1, ethers.parseEther("2"));
+
+      const [tokenId0] = await marketplace.getActiveListingAt(0);
+      const [tokenId1] = await marketplace.getActiveListingAt(1);
+
+      expect(tokenId0).to.equal(0);
+      expect(tokenId1).to.equal(1);
+    });
+
+    it("reverts when the index is out of bounds", async function () {
+      await mintAndApprove(0);
+      await marketplace.connect(seller).listNFT(0, ethers.parseEther("1"));
+
+      await expect(marketplace.getActiveListingAt(1)).to.be.revertedWith(
+        "Index out of bounds"
+      );
+    });
+  });
 });

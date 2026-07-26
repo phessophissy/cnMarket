@@ -98,15 +98,27 @@ contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
         require(usdmToken.transfer(owner(), bal), "Transfer failed");
     }
 
+    /// @notice Returns the metadata URI for a token, based on its rarity tier.
+    /// @dev Reverts if the token does not exist (via `_requireOwned`).
+    /// @param tokenId ID of the token whose URI is requested.
+    /// @return The rarity-tier metadata URI for the token.
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         _requireOwned(tokenId);
         return _rarityURIs[tokenRarity[tokenId]];
     }
 
+    /// @notice Sets the metadata URI for a given rarity tier.
+    /// @dev Only callable by the contract owner.
+    /// @param rarity Rarity tier whose URI should be updated.
+    /// @param uri    New metadata URI for the tier.
     function setRarityURI(Rarity rarity, string calldata uri) external onlyOwner {
         _rarityURIs[rarity] = uri;
     }
 
+    /// @notice Sets the mint price (in USDm base units) for a given rarity tier.
+    /// @dev Only callable by the contract owner. Use base units (not ether).
+    /// @param rarity Rarity tier whose price should be updated.
+    /// @param price  New mint price in USDm base units.
     function setMintPrice(Rarity rarity, uint256 price) external onlyOwner {
         mintPrices[rarity] = price;
     }
@@ -114,6 +126,9 @@ contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
 
 
     // Required overrides for ERC721Enumerable
+
+    /// @notice Hook invoked on every token transfer/mint/burn.
+    /// @dev Required to reconcile ERC721 and ERC721Enumerable storage.
     function _update(address to, uint256 tokenId, address auth)
         internal
         override(ERC721, ERC721Enumerable)
@@ -122,6 +137,8 @@ contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
         return super._update(to, tokenId, auth);
     }
 
+    /// @notice Notifies the contract of a balance increase without a transfer (e.g. mint batches).
+    /// @dev Required to reconcile ERC721 and ERC721Enumerable storage.
     function _increaseBalance(address account, uint128 value)
         internal
         override(ERC721, ERC721Enumerable)
@@ -129,6 +146,8 @@ contract CeloNFT is ERC721, ERC721Enumerable, Ownable {
         super._increaseBalance(account, value);
     }
 
+    /// @notice Whether this contract implements the given interface.
+    /// @dev Required to reconcile ERC721 and ERC721Enumerable interface support.
     function supportsInterface(bytes4 interfaceId)
         public
         view

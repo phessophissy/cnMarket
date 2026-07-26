@@ -37,6 +37,25 @@ If you discover a security vulnerability, please:
 2. Email the details to the maintainers
 3. Include steps to reproduce
 
+### Responsible disclosure timeline
+
+We follow a coordinated disclosure process:
+
+| Day | Action |
+|-----|--------|
+| 0 | Maintainer acknowledges receipt of the report. |
+| ≤ 3 | Maintainer confirms or rejects validity, shares an initial assessment. |
+| ≤ 14 | Fix is developed on a private branch and reviewed. |
+| ≤ 30 | Patch is deployed; a public advisory + CVE (if applicable) is published. |
+| 0–90 | Reporter is credited in the advisory (unless they prefer to remain anonymous). |
+
+- Severity is triaged against the deployed mainnet contracts; high/critical
+  reports may receive an expedited (≤ 7 day) patch cycle.
+- Public disclosure **before** a patch is released is strongly discouraged and
+  may disqualify a reporter from credit.
+- Reports about the **frontend** (e.g. XSS, wallet-connect abuse) follow the
+  same process but are triaged separately from smart-contract reports.
+
 ## Reentrancy & Checks-Effects-Interactions
 
 The marketplace is the only contract that moves both ERC-20 and ERC-721 assets

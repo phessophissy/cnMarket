@@ -52,3 +52,22 @@ npm run deploy:alfajores # Alfajores Testnet
 
 ## Verification
 Contracts are verified on [Sourcify](https://repo.sourcify.dev).
+
+## Events Reference
+
+All events are emitted from the two contracts and can be indexed off-chain for
+UI updates and analytics.
+
+### CeloNFT
+
+| Event | Indexed params | Description |
+|-------|----------------|-------------|
+| `NFTMinted(to, tokenId, rarity)` | `to`, `tokenId` | Emitted on every successful mint. |
+
+### NFTMarketplace
+
+| Event | Indexed params | Description |
+|-------|----------------|-------------|
+| `NFTListed(tokenId, seller, price)` | `tokenId`, `seller` | A token was put up for sale. |
+| `NFTDelisted(tokenId, seller)` | `tokenId`, `seller` | An active listing was cancelled by the seller. |
+| `NFTSold(tokenId, seller, buyer, price)` | `tokenId`, `seller`, `buyer` | A listed token was purchased. |
